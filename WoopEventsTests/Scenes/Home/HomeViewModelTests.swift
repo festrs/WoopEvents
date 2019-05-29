@@ -1,5 +1,5 @@
 //
-//  WoopEventsTests.swift
+//  HomeViewModelTests.swift
 //  WoopEventsTests
 //
 //  Created by Felipe Dias Pereira on 2019-05-29.
@@ -7,9 +7,8 @@
 //
 
 import XCTest
-@testable import WoopEvents
 
-class WoopEventsTests: XCTestCase {
+class HomeViewModelTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
