@@ -113,6 +113,22 @@ class HomeTableViewControllerTests: XCTestCase {
         XCTAssertTrue(viewModel.didTapCellCalled)
     }
 
+    func testShouldConfigureTableViewCellToDisplayEvent() {
+        // Given
+        let tableView = viewController.tableView
+        viewController.viewDidLoad()
+
+        // When
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = viewController.tableView(tableView!, cellForRowAt: indexPath) as? HomeTableViewCell
+        viewController.tableView(tableView!, willDisplay: cell!, forRowAt: indexPath)
+
+        // Then
+        XCTAssertEqual(cell?.eventTitleLabel.text, "Encontro regional ONGS")
+        XCTAssertEqual(cell?.eventDayLabel.text, "23")
+        XCTAssertEqual(cell?.eventMonthLabel.text, "set")
+    }
+
     func testShouldShowErrorLabelWhenFailure() {
         // Given
         viewModel.shouldError = true
@@ -165,6 +181,8 @@ class HomeViewModelSpy: HomeViewModelProtocol {
     }
 
     subscript(row: Int) -> HomeCellViewModelProtocol? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         let event = Event(id: "1",
                           title: "Encontro regional ONGS",
                           price: 10.0,
@@ -172,13 +190,13 @@ class HomeViewModelSpy: HomeViewModelProtocol {
                           longitude: 10.0,
                           image: fakeUrl,
                           eventDescription: "Encontro para discutir soluções voltadas a engajamento e captação de recursos",
-                          date: Date(),
+                          date: dateFormatter.date(from: "23/09/1990")!,
                           people: [],
                           cupons: [])
         if shouldError {
-            return HomeCellViewModel(event: event)
-        } else {
             return nil
+        } else {
+            return HomeCellViewModel(event: event)
         }
     }
 }

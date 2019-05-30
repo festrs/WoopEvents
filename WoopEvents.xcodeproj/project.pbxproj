@@ -36,6 +36,7 @@
 		3A5EE17122A07E9D00CAFA52 /* HomeTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE17022A07E9D00CAFA52 /* HomeTableViewControllerTests.swift */; };
 		3A5EE17422A0844D00CAFA52 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE17222A0844D00CAFA52 /* HomeTableViewController.swift */; };
 		3A5EE17522A0844D00CAFA52 /* HomeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5EE17322A0844D00CAFA52 /* HomeTableViewController.xib */; };
+		3A5EE17722A092A500CAFA52 /* HomeCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE17622A092A500CAFA52 /* HomeCellViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		3A5EE17022A07E9D00CAFA52 /* HomeTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewControllerTests.swift; sourceTree = "<group>"; };
 		3A5EE17222A0844D00CAFA52 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		3A5EE17322A0844D00CAFA52 /* HomeTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewController.xib; sourceTree = "<group>"; };
+		3A5EE17622A092A500CAFA52 /* HomeCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			children = (
 				3A5EE157229F17F500CAFA52 /* HomeViewModelTests.swift */,
 				3A5EE17022A07E9D00CAFA52 /* HomeTableViewControllerTests.swift */,
+				3A5EE17622A092A500CAFA52 /* HomeCellViewModelTests.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5EE17722A092A500CAFA52 /* HomeCellViewModelTests.swift in Sources */,
 				3A5EE16F229FE73700CAFA52 /* DateFormatterTests.swift in Sources */,
 				3A5EE165229F25CF00CAFA52 /* XCTestCase+Extension.swift in Sources */,
 				3A5EE158229F17F500CAFA52 /* HomeViewModelTests.swift in Sources */,

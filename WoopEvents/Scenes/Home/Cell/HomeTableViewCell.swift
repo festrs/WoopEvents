@@ -12,14 +12,15 @@ import Kingfisher
 final class HomeTableViewCell: UITableViewCell {
     static let identifier = "HomeTableViewCell"
 
-    @IBOutlet private weak var eventImageView: UIImageView! {
+    @IBOutlet private(set) weak var eventImageView: UIImageView! {
         didSet {
             eventImageView.kf.indicatorType = .activity
         }
     }
-    @IBOutlet private weak var eventTitleLabel: UILabel!
-    @IBOutlet private weak var eventDayLabel: UILabel!
-    @IBOutlet private weak var eventMonthLabel: UILabel!
+    @IBOutlet private(set) weak var eventTitleLabel: UILabel!
+    @IBOutlet private(set) weak var eventDayLabel: UILabel!
+    @IBOutlet private(set) weak var eventMonthLabel: UILabel!
+    var viewModel: HomeCellViewModelProtocol!
 
     func config(viewModel: HomeCellViewModelProtocol) {
         viewModel.imageDownloadCancellation.bind { [weak self] cancel in
@@ -31,5 +32,6 @@ final class HomeTableViewCell: UITableViewCell {
         eventTitleLabel.text = viewModel.title
         eventDayLabel.text = viewModel.day
         eventMonthLabel.text = viewModel.month
+        self.viewModel = viewModel
     }
 }
