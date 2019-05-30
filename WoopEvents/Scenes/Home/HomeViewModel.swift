@@ -16,6 +16,7 @@ protocol HomeViewModelProtocol: AnyObject {
     var loading: Dynamic<Bool> { get }
     var error: Dynamic<String?> { get }
     var events: Dynamic<[HomeCellViewModelProtocol]> { get }
+    var title: String { get }
 
     func getImagesUrls(at indexPaths: [IndexPath]) -> [URL]
     func eventsCount() -> Int
@@ -27,7 +28,8 @@ protocol HomeViewModelProtocol: AnyObject {
 class HomeViewModel {
     let error: Dynamic<String?> = Dynamic(nil)
     let events: Dynamic<[HomeCellViewModelProtocol]> = Dynamic([])
-    let loading: Dynamic<Bool> = Dynamic(true)
+    let loading: Dynamic<Bool> = Dynamic(false)
+    let title: String = String.localized(by: "HomeTitle")
     private var service: HomeServiceProtocol
     private weak var navigationDelegate: HomeNavigationProtocol?
 
@@ -40,13 +42,12 @@ class HomeViewModel {
 extension HomeViewModel: HomeViewModelProtocol {
     func getImagesUrls(at indexPaths: [IndexPath]) -> [URL] {
         let validIndexPaths = indexPaths.map { $0.row }
-        let eventsUrls = events.value.map { $0.imageUrl }
-        let eventsUrlsFiltred = eventsUrls.enumerated().filter {
+        let eventsUrls = events.value.enumerated().lazy.filter {
             validIndexPaths.contains($0.offset)
         }.compactMap { (_, object) in
-            return object
+            return object.event.image
         }
-        return eventsUrlsFiltred
+        return Array(eventsUrls)
     }
 
     func fetchEvents() {

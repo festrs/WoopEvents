@@ -21,21 +21,6 @@ final class HomeTableViewCell: UITableViewCell {
     @IBOutlet private weak var eventDayLabel: UILabel!
     @IBOutlet private weak var eventMonthLabel: UILabel!
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUp()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setUp()
-    }
-
-    private func setUp() {
-        contentView.backgroundColor = .white
-        contentView.layer.cornerRadius = 4
-    }
-
     func config(viewModel: HomeCellViewModelProtocol) {
         viewModel.imageDownloadCancellation.bind { [weak self] cancel in
             guard let self = self, cancel else { return }

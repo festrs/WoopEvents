@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public protocol APIManagerProtocol: AnyObject {
-    func getObject<T: Decodable>(with config: RequestConfig, completion: @escaping (Result<T, Error>) -> Void)
+    func getObjectArrayFailable<T: Decodable>(with config: RequestConfig, completion: @escaping (Result<[T], Error>) -> Void)
 }
 
 public struct RequestConfig {

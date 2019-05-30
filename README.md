@@ -4,7 +4,7 @@
 
 1. Download the project or ```git clone https://github.com/festrs/WoopEvents.git```
 2. Open the terminal and navigate to the directory of project ```cd WoopEvents```
-3. Install Dependencies with Carthage, if you don't have carthage istalled on our machine please visit [Carthage](https://github.com/Carthage/Carthage) to know how more ```carthage update --platform ios --cache-builds```
+3. Install Dependencies with Carthage, if you don't have carthage istalled on your machine please visit [Carthage](https://github.com/Carthage/Carthage) to know how more ```carthage update --platform ios --cache-builds```
 4. Open the workspace ```open WoopEvents.xcodeproj```
 
 ## Watch your langague! 

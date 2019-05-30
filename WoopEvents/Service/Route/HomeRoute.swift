@@ -16,7 +16,8 @@ enum HomeRoute: APIRoute {
         case .fetchEvents:
             let config = RequestConfig(path: "events",
                                        method: .get,
-                                       encoding: .url)
+                                       encoding: .url,
+                                       dateDecodeStrategy: .millisecondsSince1970)
             return config
         }
     }
