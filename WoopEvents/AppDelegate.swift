@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
+
+        let cache = ImageCache.default
+        // Limit memory cache to hold 10 images at most.
+        cache.memoryStorage.config.countLimit = 10
+        // Limit disk cache size to 50 MB.
+        cache.diskStorage.config.sizeLimit = 50 * 1024 * 1024
 
         let applicationCoordinator = AppCoordinator(window: window)
 

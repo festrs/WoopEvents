@@ -17,6 +17,7 @@ protocol HomeViewModelProtocol: AnyObject {
     var error: Dynamic<String?> { get }
     var events: Dynamic<[HomeCellViewModelProtocol]> { get }
 
+    func getImagesUrls(at indexPaths: [IndexPath]) -> [URL]
     func eventsCount() -> Int
     func fetchEvents()
     func didTapCell(at indexPath: IndexPath)
@@ -37,6 +38,17 @@ class HomeViewModel {
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
+    func getImagesUrls(at indexPaths: [IndexPath]) -> [URL] {
+        let validIndexPaths = indexPaths.map { $0.row }
+        let eventsUrls = events.value.map { $0.imageUrl }
+        let eventsUrlsFiltred = eventsUrls.enumerated().filter {
+            validIndexPaths.contains($0.offset)
+        }.compactMap { (_, object) in
+            return object
+        }
+        return eventsUrlsFiltred
+    }
+
     func fetchEvents() {
         loading.value = true
         service.fetchEvents { result in
