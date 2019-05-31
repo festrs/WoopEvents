@@ -12,6 +12,7 @@ import Kingfisher
 class HomeTableViewController: UITableViewController {
     struct Constants {
         static let emptyMsg = String.localized(by: "HomeEmptyMsg")
+        static let tableViewCellHeight: CGFloat = 138.0
     }
 
     let viewModel: HomeViewModelProtocol
@@ -123,7 +124,7 @@ class HomeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160.0
+        return Constants.tableViewCellHeight
     }
 
     // MARK: - Table view Prefetch Data

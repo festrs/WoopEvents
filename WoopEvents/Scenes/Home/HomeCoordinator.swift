@@ -28,6 +28,9 @@ class HomeCoordinator: Coordinator {
 
 extension HomeCoordinator: HomeNavigationProtocol {
     func didSelectEvent(_ event: Event) {
+        let detailViewModel = EventDetailViewModel(event: event)
+        let viewController = EventDetailViewController(viewModel: detailViewModel)
 
+        presenter.pushViewController(viewController, animated: true)
     }
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 public extension DateFormatter {
-
     static let dayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"

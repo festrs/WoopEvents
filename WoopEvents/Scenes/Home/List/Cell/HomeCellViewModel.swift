@@ -13,6 +13,7 @@ protocol HomeCellViewModelProtocol: AnyObject {
     var title: String { get }
     var day: String { get }
     var month: String { get }
+    var description: String { get }
     var event: Event { get }
     var imageDownloadCancellation: Dynamic<Bool> { get }
 
@@ -25,11 +26,13 @@ class HomeCellViewModel {
     let day: String
     let month: String
     let title: String
+    let description: String
     var imageDownloadCancellation: Dynamic<Bool> = Dynamic(false)
 
     init(event: Event) {
         self.event = event
         title = event.title
+        description = event.eventDescription
         day = DateFormatter.dayDateFormat.string(from: event.date)
         month = DateFormatter.shortMonthBrazilianDateFormat.string(from: event.date)
         imageUrl = event.image

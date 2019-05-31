@@ -12,9 +12,7 @@ protocol HomeNavigationProtocol: AnyObject {
     func didSelectEvent(_ event: Event)
 }
 
-protocol HomeViewModelProtocol: AnyObject {
-    var loading: Dynamic<Bool> { get }
-    var error: Dynamic<String?> { get }
+protocol HomeViewModelProtocol: RequestViewModelProtocol {
     var events: Dynamic<[HomeCellViewModelProtocol]> { get }
     var title: String { get }
 

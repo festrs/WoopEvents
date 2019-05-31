@@ -36,6 +36,7 @@ class HomeCellViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.title, "Encontro regional ONGS")
         XCTAssertEqual(viewModel.day, "23")
         XCTAssertEqual(viewModel.month, "set")
+        XCTAssertEqual(viewModel.description, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
         //swiftlint:disable force_unwrapping
         XCTAssertEqual(viewModel.imageUrl, URL(string: "www.google.com")!)
         XCTAssertEqual(viewModel.event.id, "1")
