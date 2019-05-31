@@ -19,6 +19,7 @@ class HomeTableViewController: UITableViewController {
     let errorLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.isHidden = true
         return label
     }()
@@ -64,6 +65,7 @@ class HomeTableViewController: UITableViewController {
         viewModel.loading.bindAndFire { [weak self] isLoading in
             guard let self = self else { return }
             isLoading ? self.refreshControl?.beginRefreshing() : self.refreshControl?.endRefreshing()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
         }
 
         viewModel.error.bind { [weak self] error in

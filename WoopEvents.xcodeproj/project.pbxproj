@@ -45,6 +45,11 @@
 		3A5EE18922A0B5AC00CAFA52 /* HomeDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE18822A0B5AC00CAFA52 /* HomeDetailRoute.swift */; };
 		3A5EE18B22A0B63500CAFA52 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE18A22A0B63500CAFA52 /* Encodable+Extension.swift */; };
 		3A5EE18D22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE18C22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift */; };
+		3A5EE19122A1268400CAFA52 /* EncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19022A1268400CAFA52 /* EncodableTests.swift */; };
+		3A5EE19522A1291C00CAFA52 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19422A1291C00CAFA52 /* UIViewController+Extension.swift */; };
+		3A5EE19722A1296D00CAFA52 /* UIViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19622A1296D00CAFA52 /* UIViewControllerTests.swift */; };
+		3A5EE19922A138D700CAFA52 /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
+		3A5EE19B22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +105,11 @@
 		3A5EE18822A0B5AC00CAFA52 /* HomeDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailRoute.swift; sourceTree = "<group>"; };
 		3A5EE18A22A0B63500CAFA52 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		3A5EE18C22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModelProtocol.swift; sourceTree = "<group>"; };
+		3A5EE19022A1268400CAFA52 /* EncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableTests.swift; sourceTree = "<group>"; };
+		3A5EE19422A1291C00CAFA52 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		3A5EE19622A1296D00CAFA52 /* UIViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerTests.swift; sourceTree = "<group>"; };
+		3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModelTests.swift; sourceTree = "<group>"; };
+		3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +223,7 @@
 				3A5EE111229F0D3E00CAFA52 /* String+Extension.swift */,
 				3A5EE16B229FE70500CAFA52 /* DateFormatter+Extension.swift */,
 				3A5EE18A22A0B63500CAFA52 /* Encodable+Extension.swift */,
+				3A5EE19422A1291C00CAFA52 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -258,9 +269,8 @@
 		3A5EE156229F17E900CAFA52 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3A5EE157229F17F500CAFA52 /* HomeViewModelTests.swift */,
-				3A5EE17022A07E9D00CAFA52 /* HomeTableViewControllerTests.swift */,
-				3A5EE17622A092A500CAFA52 /* HomeCellViewModelTests.swift */,
+				3A5EE19322A127EA00CAFA52 /* Detail */,
+				3A5EE19222A127E500CAFA52 /* List */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -286,6 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				3A5EE16E229FE73700CAFA52 /* DateFormatterTests.swift */,
+				3A5EE19022A1268400CAFA52 /* EncodableTests.swift */,
+				3A5EE19622A1296D00CAFA52 /* UIViewControllerTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +324,25 @@
 				3A5EE17322A0844D00CAFA52 /* HomeTableViewController.xib */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		3A5EE19222A127E500CAFA52 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				3A5EE157229F17F500CAFA52 /* HomeViewModelTests.swift */,
+				3A5EE17022A07E9D00CAFA52 /* HomeTableViewControllerTests.swift */,
+				3A5EE17622A092A500CAFA52 /* HomeCellViewModelTests.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		3A5EE19322A127EA00CAFA52 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */,
+				3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,6 +506,7 @@
 				3A5EE14F229F15FB00CAFA52 /* HomeService.swift in Sources */,
 				3A5EE14A229F15FB00CAFA52 /* HomeCoordinator.swift in Sources */,
 				3A5EE18222A09A7B00CAFA52 /* EventDetailService.swift in Sources */,
+				3A5EE19522A1291C00CAFA52 /* UIViewController+Extension.swift in Sources */,
 				3A5EE18122A09A7B00CAFA52 /* EventDetailViewModel.swift in Sources */,
 				3A5EE18522A09AA000CAFA52 /* EventDetailViewController.swift in Sources */,
 				3A5EE104229F045D00CAFA52 /* Environment.swift in Sources */,
@@ -495,9 +527,13 @@
 			files = (
 				3A5EE17722A092A500CAFA52 /* HomeCellViewModelTests.swift in Sources */,
 				3A5EE16F229FE73700CAFA52 /* DateFormatterTests.swift in Sources */,
+				3A5EE19B22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift in Sources */,
 				3A5EE165229F25CF00CAFA52 /* XCTestCase+Extension.swift in Sources */,
 				3A5EE158229F17F500CAFA52 /* HomeViewModelTests.swift in Sources */,
+				3A5EE19722A1296D00CAFA52 /* UIViewControllerTests.swift in Sources */,
 				3A5EE17122A07E9D00CAFA52 /* HomeTableViewControllerTests.swift in Sources */,
+				3A5EE19922A138D700CAFA52 /* EventDetailViewModelTests.swift in Sources */,
+				3A5EE19122A1268400CAFA52 /* EncodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

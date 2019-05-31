@@ -9,6 +9,10 @@
 import Foundation
 import CoreLocation
 
+protocol EventDetailNavigationProtocol: AnyObject {
+    func didTapShare(_ objectsToShare: [Any])
+}
+
 protocol EventDetailViewModelProtocol: RequestViewModelProtocol {
     var eventTitle: String { get }
     var eventDay: String { get }
@@ -17,8 +21,10 @@ protocol EventDetailViewModelProtocol: RequestViewModelProtocol {
     var eventDescription: String { get }
     var eventFullDate: String { get }
     var eventImageUrl: URL { get }
+    var checkInResult: Dynamic<Bool> { get }
 
     func checkIn()
+    func shareObjects(_ objectsToShare: [Any])
 }
 
 class EventDetailViewModel {
@@ -32,10 +38,15 @@ class EventDetailViewModel {
     let eventImageUrl: URL
     let loading: Dynamic<Bool> = Dynamic(false)
     let error: Dynamic<String?> = Dynamic(nil)
+    let checkInResult: Dynamic<Bool> = Dynamic(false)
     private let event: Event
+    private weak var navigationDelegate: EventDetailNavigationProtocol?
 
-    init(service: EventDetailServiceProtocol = EventDetailService(), event: Event) {
+    init(service: EventDetailServiceProtocol = EventDetailService(),
+         navigationDelegate: EventDetailNavigationProtocol? = nil,
+         event: Event) {
         self.service = service
+        self.navigationDelegate = navigationDelegate
         self.event = event
         eventTitle = event.title
         eventDescription = event.eventDescription
@@ -45,12 +56,16 @@ class EventDetailViewModel {
         eventLocation = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
+        dateFormatter.timeStyle = .short
         eventFullDate = dateFormatter.string(from: event.date)
     }
 }
 
 extension EventDetailViewModel: EventDetailViewModelProtocol {
+    func shareObjects(_ objectsToShare: [Any]) {
+        navigationDelegate?.didTapShare(objectsToShare)
+    }
+
     func checkIn() {
         let userEmail = "felipe@gmail.com"
         let userName = "felipe"
@@ -62,7 +77,7 @@ extension EventDetailViewModel: EventDetailViewModelProtocol {
 
             switch result {
             case .success:
-                print("yeah")
+                self.checkInResult.value = true
 
             case .failure(let error):
                 self.error.value = error.localizedDescription
