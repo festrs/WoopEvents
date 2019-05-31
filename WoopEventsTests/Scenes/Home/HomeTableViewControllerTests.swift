@@ -127,6 +127,7 @@ class HomeTableViewControllerTests: XCTestCase {
         XCTAssertEqual(cell?.eventTitleLabel.text, "Encontro regional ONGS")
         XCTAssertEqual(cell?.eventDayLabel.text, "23")
         XCTAssertEqual(cell?.eventMonthLabel.text, "set")
+        XCTAssertEqual(cell?.eventDescriptionLabel.text, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
     }
 
     func testShouldShowErrorLabelWhenFailure() {

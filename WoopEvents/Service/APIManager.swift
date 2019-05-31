@@ -27,8 +27,8 @@ public class APIManager {
 }
 
 extension APIManager: APIManagerProtocol {
-    public func getObjectArrayFailable<T>(with config: RequestConfig,
-                                          completion: @escaping (Result<[T], Error>) -> Void) where T : Decodable {
+    public func requestObjectArrayFailable<T>(with config: RequestConfig,
+                                          completion: @escaping (Result<[T], Error>) -> Void) where T: Decodable {
         guard let url = URL(string: "\(baseUrl)\(config.path)") else {
             fatalError("Url malformed")
         }
@@ -58,5 +58,37 @@ extension APIManager: APIManagerProtocol {
                     }
                 }
             }
+    }
+
+    public func requestObject<T>(with config: RequestConfig, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
+        guard let url = URL(string: "\(baseUrl)\(config.path)") else {
+            fatalError("Url malformed")
+        }
+        alamofireManager.request(url,
+                                 method: config.method.getAlamofireHttpMethod(),
+                                 parameters: config.parameters,
+                                 encoding: config.encoding.getAlamofireEnconding(),
+                                 headers: HTTPHeaders(config.headers))
+            .validate()
+            .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { response in
+                if let error = response.error {
+                    completion(Result.failure(error))
+                } else {
+                    guard let data = response.data else {
+                        completion(Result.failure(APIManagerErrors.dataObjectNil))
+                        return
+                    }
+                    do {
+                        let decoder = JSONDecoder()
+                        if let dateDecodingStrategy = config.dateDecodeStrategy {
+                            decoder.dateDecodingStrategy = dateDecodingStrategy
+                        }
+                        let object = try decoder.decode(T.self, from: data)
+                        completion(Result.success(object))
+                    } catch let error {
+                        completion(Result.failure(error))
+                    }
+                }
+        }
     }
 }

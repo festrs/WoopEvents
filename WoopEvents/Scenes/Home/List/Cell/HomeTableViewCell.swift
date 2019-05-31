@@ -20,7 +20,21 @@ final class HomeTableViewCell: UITableViewCell {
     @IBOutlet private(set) weak var eventTitleLabel: UILabel!
     @IBOutlet private(set) weak var eventDayLabel: UILabel!
     @IBOutlet private(set) weak var eventMonthLabel: UILabel!
+    @IBOutlet private(set) weak var eventDescriptionLabel: UILabel!
     var viewModel: HomeCellViewModelProtocol!
+
+    // MARK: Life Cycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        config()
+    }
+
+    // MARK: Functions
+    private func config() {
+        eventImageView.layer.cornerRadius = 4.0
+        eventImageView.clipsToBounds = true
+    }
 
     func config(viewModel: HomeCellViewModelProtocol) {
         viewModel.imageDownloadCancellation.bind { [weak self] cancel in
@@ -32,6 +46,7 @@ final class HomeTableViewCell: UITableViewCell {
         eventTitleLabel.text = viewModel.title
         eventDayLabel.text = viewModel.day
         eventMonthLabel.text = viewModel.month
+        eventDescriptionLabel.text = viewModel.description
         self.viewModel = viewModel
     }
 }
