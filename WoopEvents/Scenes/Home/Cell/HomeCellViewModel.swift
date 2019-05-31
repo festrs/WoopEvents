@@ -32,7 +32,7 @@ class HomeCellViewModel {
         title = event.title
         day = DateFormatter.dayDateFormat.string(from: event.date)
         month = DateFormatter.shortMonthBrazilianDateFormat.string(from: event.date)
-        imageUrl = URL(string: event.image)
+        imageUrl = event.image
     }
 }
 

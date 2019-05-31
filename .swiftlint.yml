@@ -46,4 +46,6 @@ identifier_name:
     - at
     - ID
     - URL
+private_outlet:
+  allow_private_set: true
 reporter: "xcode"

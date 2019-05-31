@@ -27,7 +27,7 @@ extension HomeService: HomeServiceProtocol {
     func fetchEvents(completionHandler: @escaping FetchEventsCompletionHandler) {
         let route = HomeRoute.fetchEvents
 
-        apiService.getObject(with: route.config) { (result: Result<Events, Error>) in
+        apiService.getObjectArrayFailable(with: route.config) { (result: Result<Events, Error>) in
             completionHandler(result)
         }
     }

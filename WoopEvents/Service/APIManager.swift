@@ -27,7 +27,8 @@ public class APIManager {
 }
 
 extension APIManager: APIManagerProtocol {
-    public func getObject<T>(with config: RequestConfig, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
+    public func getObjectArrayFailable<T>(with config: RequestConfig,
+                                          completion: @escaping (Result<[T], Error>) -> Void) where T : Decodable {
         guard let url = URL(string: "\(baseUrl)\(config.path)") else {
             fatalError("Url malformed")
         }
@@ -50,7 +51,7 @@ extension APIManager: APIManagerProtocol {
                         if let dateDecodingStrategy = config.dateDecodeStrategy {
                             decoder.dateDecodingStrategy = dateDecodingStrategy
                         }
-                        let object = try decoder.decode(T.self, from: data)
+                        let object = try decoder.decode([FailableDecodable<T>].self, from: data).compactMap { $0.base }
                         completion(Result.success(object))
                     } catch let error {
                         completion(Result.failure(error))

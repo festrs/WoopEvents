@@ -20,7 +20,7 @@ class HomeCoordinator: Coordinator {
     // MARK: - Functions
     func start() {
         let viewModel = HomeViewModel(navigationDelegate: self)
-        let homeViewController = HomeViewController(viewModel: viewModel)
+        let homeViewController = HomeTableViewController(viewModel: viewModel)
     
         presenter.pushViewController(homeViewController, animated: true)
     }

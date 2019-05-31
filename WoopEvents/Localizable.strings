@@ -6,3 +6,5 @@
   Copyright © 2019 FelipeP. All rights reserved.
 */
 
+"HomeTitle" = "Eventos";
+"HomeEmptyMsg" = "Não foi encontrado nenhum evento";
