@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventDetailViewController" customModule="WoopEvents" customModuleProvider="target">
             <connections>
+                <outlet property="checkinButton" destination="5us-oe-Cwg" id="2Lt-vz-iqX"/>
                 <outlet property="checkinButtonTitleLabel" destination="oXX-Om-S41" id="dqs-d0-rQR"/>
                 <outlet property="detailsLabel" destination="RmW-HO-f8s" id="RSp-cj-Sen"/>
                 <outlet property="eventDayLabel" destination="FoH-bU-JJu" id="dmy-4Y-COo"/>
@@ -20,7 +21,10 @@
                 <outlet property="eventMonthLabel" destination="vS1-kT-eF0" id="MfC-Ad-Vms"/>
                 <outlet property="eventTimeLabel" destination="hYg-WX-q1z" id="J3L-dZ-uHi"/>
                 <outlet property="eventTitleLabel" destination="blm-fE-0sr" id="tYE-Xe-TIf"/>
+                <outlet property="loaderActivityIndicator" destination="iA7-tX-UV8" id="gnI-EL-F0A"/>
+                <outlet property="loaderView" destination="bjA-oN-Ixf" id="6uu-jT-5dE"/>
                 <outlet property="mapView" destination="JNZ-Bm-bPL" id="ZoV-6p-l9g"/>
+                <outlet property="shareButton" destination="DWi-zA-2SQ" id="QQf-tN-KzI"/>
                 <outlet property="shareButtonTitleLabel" destination="FQK-74-TZG" id="BhR-Pp-ddc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -153,6 +157,21 @@
                                         </label>
                                     </subviews>
                                 </stackView>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjA-oN-Ixf">
+                                    <rect key="frame" x="130" y="222" width="60" height="60"/>
+                                    <subviews>
+                                        <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="iA7-tX-UV8">
+                                            <rect key="frame" x="11.5" y="11.5" width="37" height="37"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="6ab-UK-cEr"/>
+                                        <constraint firstItem="iA7-tX-UV8" firstAttribute="centerX" secondItem="bjA-oN-Ixf" secondAttribute="centerX" id="UxJ-TW-OoO"/>
+                                        <constraint firstAttribute="height" constant="60" id="dMk-Qr-20o"/>
+                                        <constraint firstItem="iA7-tX-UV8" firstAttribute="centerY" secondItem="bjA-oN-Ixf" secondAttribute="centerY" id="lK4-3I-dcy"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -165,6 +184,7 @@
                                 <constraint firstItem="b4v-gY-EJD" firstAttribute="leading" secondItem="5qr-pq-3pH" secondAttribute="leading" constant="30" id="AJa-yc-SVh"/>
                                 <constraint firstAttribute="trailing" secondItem="b4v-gY-EJD" secondAttribute="trailing" constant="30" id="BZp-i7-7RF"/>
                                 <constraint firstItem="nSN-PQ-Pdx" firstAttribute="leading" secondItem="5qr-pq-3pH" secondAttribute="leading" id="Dbs-J1-fcI"/>
+                                <constraint firstItem="bjA-oN-Ixf" firstAttribute="centerX" secondItem="5qr-pq-3pH" secondAttribute="centerX" id="PH3-Rg-FsC"/>
                                 <constraint firstAttribute="trailing" secondItem="FLr-SE-44W" secondAttribute="trailing" constant="18" id="Q0l-9p-Jyc"/>
                                 <constraint firstItem="PSq-3U-xhJ" firstAttribute="top" secondItem="5qr-pq-3pH" secondAttribute="top" constant="8" id="Q8W-SZ-wi1"/>
                                 <constraint firstItem="b4v-gY-EJD" firstAttribute="top" secondItem="RmW-HO-f8s" secondAttribute="bottom" constant="18" id="STq-mY-gok"/>
@@ -194,6 +214,7 @@
             <constraints>
                 <constraint firstItem="bcz-Yy-FzC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6CM-2v-jOw"/>
                 <constraint firstAttribute="bottom" secondItem="bcz-Yy-FzC" secondAttribute="bottom" id="JbX-kc-LNz"/>
+                <constraint firstItem="bjA-oN-Ixf" firstAttribute="centerY" secondItem="JDL-C7-KaE" secondAttribute="centerY" id="Yz8-Go-5lx"/>
                 <constraint firstAttribute="trailing" secondItem="bcz-Yy-FzC" secondAttribute="trailing" id="aNc-2W-YZE"/>
                 <constraint firstItem="bcz-Yy-FzC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xMo-Ud-xvD"/>
             </constraints>

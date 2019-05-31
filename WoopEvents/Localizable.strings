@@ -6,5 +6,19 @@
   Copyright © 2019 FelipeP. All rights reserved.
 */
 
+// MARK: - Home List
 "HomeTitle" = "Eventos";
 "HomeEmptyMsg" = "Não foi encontrado nenhum evento";
+
+// MARK: - Home Detail
+"HomeDetailCheckInSuccessTitle" = "Vejo você no evento";
+"HomeDetailCheckInSuccessMsg" = "Você realizou checkin com sucesso.";
+"HomeDetailErrorTitle" = "Atenção!";
+"HomeDetailCheckinButtonTitle" = "CheckIn";
+"HomeDetailShareButtonTitle" = "Compartilhar";
+"HomeDetailDetailsTitle" = "Detalhes:";
+
+// MARK: - Service 
+"ErrorDataObjectNil" = "Tivemos um problema contate o suporte para detalhes";
+"ErrorNoInternetError" = "Parece que você está sem internet, reconecte-se e tente novamente!";
+"ErrorDefault" = "Ocorreu um erro em sua requisição";

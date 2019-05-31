@@ -9,14 +9,36 @@
 import Foundation
 import Alamofire
 
+enum APIManagerErrors: Error {
+    case dataObjectNil
+    case noInternetError
+    case alamoFireError(String)
+    case unknown
+}
+
+extension APIManagerErrors: LocalizedError {
+    // Can be logged to an error handler service
+    var errorDescription: String? {
+        switch self {
+        case .dataObjectNil:
+            return String.localized(by: "ErrorDataObjectNil")
+
+        case .noInternetError:
+            return String.localized(by: "ErrorNoInternetError")
+
+        case .alamoFireError(let errorMsg):
+            return "\(String.localized(by: "ErrorDefault")) \n \(errorMsg)"
+
+        case .unknown:
+            return String.localized(by: "ErrorDefault")
+        }
+    }
+}
+
 public class APIManager {
     private let baseUrl: String
     private let alamofireManager: Session
 
-    enum APIManagerErrors: Error {
-        case dataObjectNil
-    }
-    
     // MARK: - Initialization
     public init(_ baseUrl: String = Environment.baseUrl, timeoutInterval: TimeInterval = 60) {
         let configuration = URLSessionConfiguration.default
@@ -24,11 +46,20 @@ public class APIManager {
         self.alamofireManager = Alamofire.Session(configuration: configuration)
         self.baseUrl = baseUrl
     }
+
+    private func handleError(_ error: Error) -> APIManagerErrors {
+        if let error = error as? URLError, error.code == .notConnectedToInternet {
+            return .noInternetError
+        } else if let afError = error.asAFError {
+            return .alamoFireError(afError.localizedDescription)
+        }
+        return .unknown
+    }
 }
 
 extension APIManager: APIManagerProtocol {
     public func requestObjectArrayFailable<T>(with config: RequestConfig,
-                                          completion: @escaping (Result<[T], Error>) -> Void) where T: Decodable {
+                                              completion: @escaping (Result<[T], Error>) -> Void) where T: Decodable {
         guard let url = URL(string: "\(baseUrl)\(config.path)") else {
             fatalError("Url malformed")
         }
@@ -37,10 +68,11 @@ extension APIManager: APIManagerProtocol {
                                  parameters: config.parameters,
                                  encoding: config.encoding.getAlamofireEnconding(),
                                  headers: HTTPHeaders(config.headers))
-            .validate()
-            .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { response in
+        .validate()
+        .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { [weak self] response in
+            guard let self = self else { return }
                 if let error = response.error {
-                    completion(Result.failure(error))
+                    completion(Result.failure(self.handleError(error)))
                 } else {
                     guard let data = response.data else {
                         completion(Result.failure(APIManagerErrors.dataObjectNil))
@@ -57,7 +89,7 @@ extension APIManager: APIManagerProtocol {
                         completion(Result.failure(error))
                     }
                 }
-            }
+        }
     }
 
     public func requestObject<T>(with config: RequestConfig, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
@@ -69,10 +101,11 @@ extension APIManager: APIManagerProtocol {
                                  parameters: config.parameters,
                                  encoding: config.encoding.getAlamofireEnconding(),
                                  headers: HTTPHeaders(config.headers))
-            .validate()
-            .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { response in
+        .validate()
+        .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { [weak self] response in
+            guard let self = self else { return }
                 if let error = response.error {
-                    completion(Result.failure(error))
+                    completion(Result.failure(self.handleError(error)))
                 } else {
                     guard let data = response.data else {
                         completion(Result.failure(APIManagerErrors.dataObjectNil))
