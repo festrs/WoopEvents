@@ -28,7 +28,6 @@ protocol EventDetailViewModelProtocol: RequestViewModelProtocol {
 }
 
 class EventDetailViewModel {
-    private var service: EventDetailServiceProtocol
     let eventDay: String
     let eventTitle: String
     let eventMonth: String
@@ -40,6 +39,7 @@ class EventDetailViewModel {
     let error: Dynamic<String?> = Dynamic(nil)
     let checkInResult: Dynamic<Bool> = Dynamic(false)
     private let event: Event
+    private var service: EventDetailServiceProtocol
     private weak var navigationDelegate: EventDetailNavigationProtocol?
 
     init(service: EventDetailServiceProtocol = EventDetailService(),
@@ -53,11 +53,8 @@ class EventDetailViewModel {
         eventImageUrl = event.image
         eventDay = DateFormatter.dayDateFormat.string(from: event.date)
         eventMonth = DateFormatter.shortMonthBrazilianDateFormat.string(from: event.date)
+        eventFullDate = DateFormatter.fullDateEventDateFormat.string(from: event.date)
         eventLocation = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        eventFullDate = dateFormatter.string(from: event.date)
     }
 }
 
@@ -69,10 +66,10 @@ extension EventDetailViewModel: EventDetailViewModelProtocol {
     func checkIn() {
         let userEmail = "felipe@gmail.com"
         let userName = "felipe"
-        let requestObject = EventCheckInRequestObject(eventId: event.id, name: userName, email: userEmail)
+        let query = EventCheckInRequestObject(eventId: event.id, name: userName, email: userEmail)
 
         loading.value = true
-        service.checkin(with: requestObject) { result in
+        service.request(path: .checkIn(query)) { result in
             self.loading.value = false
 
             switch result {

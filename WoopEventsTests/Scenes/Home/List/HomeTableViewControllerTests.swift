@@ -9,15 +9,15 @@
 import XCTest
 @testable import WoopEvents
 
-class HomeTableViewControllerTests: XCTestCase {
+final class HomeTableViewControllerTests: XCTestCase {
     var window: UIWindow!
     var viewController: HomeTableViewController!
-    var viewModel: HomeViewModelSpy!
+    var viewModel: HomeViewModelMock!
 
     override func setUp() {
         super.setUp()
         window = UIWindow()
-        viewModel = HomeViewModelSpy()
+        viewModel = HomeViewModelMock()
         viewController = HomeTableViewController(viewModel: viewModel)
     }
 
@@ -28,7 +28,6 @@ class HomeTableViewControllerTests: XCTestCase {
 
     private func loadView() {
         window.addSubview(viewController.view)
-        RunLoop.current.run(until: Date())
     }
 
     func testShouldBindNecessaryVariables() {
@@ -85,16 +84,7 @@ class HomeTableViewControllerTests: XCTestCase {
         viewController.viewDidLoad()
 
         // When
-        let event = Event(id: "1",
-                          title: "Encontro regional ONGS",
-                          price: 10.0,
-                          latitude: 10.0,
-                          longitude: 10.0,
-                          image: URL(string: "www.google.com")!,
-                          eventDescription: "Encontro para discutir soluções voltadas a engajamento e captação de recursos",
-                          date: Date(),
-                          people: [],
-                          cupons: [])
+        let event = Event.stub(withID: "1")
         viewModel.events.value = [HomeCellViewModel(event: event)]
 
         // Then
@@ -124,10 +114,12 @@ class HomeTableViewControllerTests: XCTestCase {
         viewController.tableView(tableView!, willDisplay: cell!, forRowAt: indexPath)
 
         // Then
-        XCTAssertEqual(cell?.eventTitleLabel.text, "Encontro regional ONGS")
-        XCTAssertEqual(cell?.eventDayLabel.text, "23")
-        XCTAssertEqual(cell?.eventMonthLabel.text, "set")
-        XCTAssertEqual(cell?.eventDescriptionLabel.text, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
+        let cellMirror = HomeTableViewCellMirror(tableViewCell: cell ?? UITableViewCell())
+        XCTAssertEqual(cellMirror.eventTitleLabel?.text, "Encontro regional ONGS")
+        XCTAssertEqual(cellMirror.eventDayLabel?.text, "23")
+        XCTAssertEqual(cellMirror.eventMonthLabel?.text, "set")
+        let description = "Encontro para discutir soluções voltadas a engajamento e captação de recursos"
+        XCTAssertEqual(cellMirror.eventDescriptionLabel?.text, description)
     }
 
     func testShouldShowErrorLabelWhenFailure() {
@@ -151,7 +143,7 @@ class TableViewSpy: UITableView {
     }
 }
 
-class HomeViewModelSpy: HomeViewModelProtocol {
+class HomeViewModelMock: HomeViewModelProtocol {
     var title: String = "Eventos"
     var loading: Dynamic<Bool> = Dynamic(false)
     var error: Dynamic<String?> = Dynamic(nil)
@@ -177,27 +169,16 @@ class HomeViewModelSpy: HomeViewModelProtocol {
         }
     }
 
-    func didTapCell(at indexPath: IndexPath) {
-        didTapCellCalled = true
+    func getObject(at row: Int) -> HomeCellViewModelProtocol? {
+      let event = Event.stub(withID: "1")
+      if shouldError {
+        return nil
+      } else {
+        return HomeCellViewModel(event: event)
+      }
     }
 
-    subscript(row: Int) -> HomeCellViewModelProtocol? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let event = Event(id: "1",
-                          title: "Encontro regional ONGS",
-                          price: 10.0,
-                          latitude: 10.0,
-                          longitude: 10.0,
-                          image: fakeUrl,
-                          eventDescription: "Encontro para discutir soluções voltadas a engajamento e captação de recursos",
-                          date: dateFormatter.date(from: "23/09/1990")!,
-                          people: [],
-                          cupons: [])
-        if shouldError {
-            return nil
-        } else {
-            return HomeCellViewModel(event: event)
-        }
+    func didTapCell(at indexPath: IndexPath) {
+        didTapCellCalled = true
     }
 }

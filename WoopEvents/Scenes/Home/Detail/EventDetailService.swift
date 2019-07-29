@@ -11,24 +11,20 @@ import Foundation
 typealias CheckInCompletionHandler = (Result<Bool, Error>) -> Void
 
 protocol EventDetailServiceProtocol: AnyObject {
-    func checkin(with requestObject: EventCheckInRequestObject, completionHandler: @escaping CheckInCompletionHandler)
+    func request(path route: HomeDetailRoute, completionHandler: @escaping CheckInCompletionHandler)
 }
 
 class EventDetailService {
-    private var apiService: APIManagerProtocol
+    private var service: APIManagerProtocol
 
     // MARK: - Initialization
     init(service: APIManagerProtocol = APIManager()) {
-        apiService = service
+        self.service = service
     }
 }
 
 extension EventDetailService: EventDetailServiceProtocol {
-    func checkin(with requestObject: EventCheckInRequestObject, completionHandler: @escaping CheckInCompletionHandler) {
-        let route = HomeDetailRoute.checkIn(requestObject)
-        apiService.requestObject(with: route.config) { (result: Result<EventCheckInResponseObject, Error>) in
-            let resultMapped = result.map { _ in true }
-            completionHandler(resultMapped)
-        }
+    func request(path route: HomeDetailRoute, completionHandler: @escaping CheckInCompletionHandler) {
+        service.request(with: route.config, completion: completionHandler)
     }
 }

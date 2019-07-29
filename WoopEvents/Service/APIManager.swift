@@ -38,6 +38,7 @@ extension APIManagerErrors: LocalizedError {
 public class APIManager {
     private let baseUrl: String
     private let alamofireManager: Session
+    private let decoder = JSONDecoder()
 
     // MARK: - Initialization
     public init(_ baseUrl: String = Environment.baseUrl, timeoutInterval: TimeInterval = 60) {
@@ -58,8 +59,7 @@ public class APIManager {
 }
 
 extension APIManager: APIManagerProtocol {
-    public func requestObjectArrayFailable<T>(with config: RequestConfig,
-                                              completion: @escaping (Result<[T], Error>) -> Void) where T: Decodable {
+    public func request(with config: RequestConfig, completion: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)\(config.path)") else {
             fatalError("Url malformed")
         }
@@ -68,28 +68,15 @@ extension APIManager: APIManagerProtocol {
                                  parameters: config.parameters,
                                  encoding: config.encoding.getAlamofireEnconding(),
                                  headers: HTTPHeaders(config.headers))
-        .validate()
-        .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { [weak self] response in
-            guard let self = self else { return }
+            .validate()
+            .responseData(queue: DispatchQueue.global(qos: .userInitiated)) { [weak self] response in
+                guard let self = self else { return }
                 if let error = response.error {
                     completion(Result.failure(self.handleError(error)))
                 } else {
-                    guard let data = response.data else {
-                        completion(Result.failure(APIManagerErrors.dataObjectNil))
-                        return
-                    }
-                    do {
-                        let decoder = JSONDecoder()
-                        if let dateDecodingStrategy = config.dateDecodeStrategy {
-                            decoder.dateDecodingStrategy = dateDecodingStrategy
-                        }
-                        let object = try decoder.decode([FailableDecodable<T>].self, from: data).compactMap { $0.base }
-                        completion(Result.success(object))
-                    } catch let error {
-                        completion(Result.failure(error))
-                    }
+                    completion(Result.success(true))
                 }
-        }
+            }
     }
 
     public func requestObject<T>(with config: RequestConfig, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
@@ -112,11 +99,10 @@ extension APIManager: APIManagerProtocol {
                         return
                     }
                     do {
-                        let decoder = JSONDecoder()
                         if let dateDecodingStrategy = config.dateDecodeStrategy {
-                            decoder.dateDecodingStrategy = dateDecodingStrategy
+                            self.decoder.dateDecodingStrategy = dateDecodingStrategy
                         }
-                        let object = try decoder.decode(T.self, from: data)
+                        let object = try self.decoder.decode(T.self, from: data)
                         completion(Result.success(object))
                     } catch let error {
                         completion(Result.failure(error))

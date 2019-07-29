@@ -11,24 +11,29 @@ import Foundation
 typealias FetchEventsCompletionHandler = (Result<Events, Error>) -> Void
 
 protocol HomeServiceProtocol: AnyObject {
-    func fetchEvents(completionHandler: @escaping FetchEventsCompletionHandler)
+    func request(path route: HomeRoute, completionHandler: @escaping FetchEventsCompletionHandler)
 }
 
 class HomeService {
-    private var apiService: APIManagerProtocol
+    private var service: APIManagerProtocol
 
     // MARK: - Initialization
     init(service: APIManagerProtocol = APIManager()) {
-        apiService = service
+        self.service = service
     }
 }
 
 extension HomeService: HomeServiceProtocol {
-    func fetchEvents(completionHandler: @escaping FetchEventsCompletionHandler) {
-        let route = HomeRoute.fetchEvents
+    func request(path route: HomeRoute, completionHandler: @escaping FetchEventsCompletionHandler) {
+        service.requestObject(with: route.config) { (result: Result<[FailableDecodable<Event>], Error>) in
+            switch result {
+            case .success(let data):
+                let objects = data.compactMap { $0.base }
+                completionHandler(.success(objects))
 
-        apiService.requestObjectArrayFailable(with: route.config) { (result: Result<Events, Error>) in
-            completionHandler(result)
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
         }
     }
 }

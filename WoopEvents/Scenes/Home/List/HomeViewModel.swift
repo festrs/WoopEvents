@@ -20,7 +20,7 @@ protocol HomeViewModelProtocol: RequestViewModelProtocol {
     func eventsCount() -> Int
     func fetchEvents()
     func didTapCell(at indexPath: IndexPath)
-    subscript(row: Int) -> HomeCellViewModelProtocol? { get }
+    func getObject(at row: Int) -> HomeCellViewModelProtocol?
 }
 
 class HomeViewModel {
@@ -50,7 +50,7 @@ extension HomeViewModel: HomeViewModelProtocol {
 
     func fetchEvents() {
         loading.value = true
-        service.fetchEvents { result in
+        service.request(path: .fetchEvents) { result in
             self.loading.value = false
 
             switch result {
@@ -63,7 +63,7 @@ extension HomeViewModel: HomeViewModelProtocol {
         }
     }
 
-    subscript(row: Int) -> HomeCellViewModelProtocol? {
+    func getObject(at row: Int) -> HomeCellViewModelProtocol? {
         guard events.value.indices.contains(row) else {
             return nil
         }

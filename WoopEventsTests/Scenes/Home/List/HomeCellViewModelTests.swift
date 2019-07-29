@@ -17,18 +17,7 @@ class HomeCellViewModelTests: XCTestCase {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
 
-        let event = Event(id: "1",
-                          title: "Encontro regional ONGS",
-                          price: 10.0,
-                          latitude: 10.0,
-                          longitude: 10.0,
-                          //swiftlint:disable force_unwrapping
-                          image: URL(string: "www.google.com")!,
-                          eventDescription: "Encontro para discutir soluções voltadas a engajamento e captação de recursos",
-                          //swiftlint:disable force_unwrapping
-                          date: dateFormatter.date(from: "23/09/1990")!,
-                          people: [],
-                          cupons: [])
+        let event = Event.stub(withID: "123")
         viewModel = HomeCellViewModel(event: event)
     }
 
@@ -39,7 +28,7 @@ class HomeCellViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.description, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
         //swiftlint:disable force_unwrapping
         XCTAssertEqual(viewModel.imageUrl, URL(string: "www.google.com")!)
-        XCTAssertEqual(viewModel.event.id, "1")
+        XCTAssertEqual(viewModel.event.id, "123")
     }
 
     func testCancelDownloadCalled() {

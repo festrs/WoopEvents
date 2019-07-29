@@ -21,4 +21,11 @@ public extension DateFormatter {
         formatter.locale = Locale(identifier: "pt_BR")
         return formatter
     }()
+
+    static let fullDateEventDateFormat: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        return dateFormatter
+    }()
 }

@@ -9,22 +9,19 @@
 import XCTest
 @testable import WoopEvents
 
-class HomeViewModelTests: XCTestCase {
-    var service: HomeServiceSpy!
+final class HomeViewModelTests: XCTestCase {
     var navigation: HomeNavigationSpy!
-    var viewModel: HomeViewModel!
 
     override func setUp() {
         super.setUp()
-        if let events: Events = loadJson(filename: "events") {
-            service = HomeServiceSpy(events: events)
-            navigation = HomeNavigationSpy()
-            viewModel = HomeViewModel(service: service, navigationDelegate: navigation)
-        }
+
+        navigation = HomeNavigationSpy()
     }
 
     func testFetchEventsSuccess() {
         // Given
+        let service = HomeServiceSuccessStub()
+        let viewModel = HomeViewModel(service: service)
         let observer = DynamicObserver<Bool>()
         viewModel.loading.setObserver(with: observer)
 
@@ -39,10 +36,10 @@ class HomeViewModelTests: XCTestCase {
 
     func testFetchEventsFailure() {
         // Given
+        let service = HomeServiceErrorStub()
+        let viewModel = HomeViewModel(service: service)
         let observer = DynamicObserver<Bool>()
         viewModel.loading.setObserver(with: observer)
-
-        service.shouldFail = true
 
         // When
         viewModel.fetchEvents()
@@ -56,57 +53,43 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testEventsCount() {
+        // Given
+        let service = HomeServiceSuccessStub()
+        let viewModel = HomeViewModel(service: service)
+
         // When
         viewModel.fetchEvents()
 
         // Then
-        XCTAssertEqual(viewModel.eventsCount(), 1)
+        XCTAssertEqual(viewModel.eventsCount(), 3)
     }
 
-    func testViewModelSubscript() {
+    func testViewModelGetObject() {
         // Given
+        let service = HomeServiceSuccessStub()
+        let viewModel = HomeViewModel(service: service)
         viewModel.fetchEvents()
 
         // When
-        let object = viewModel[0]?.event
+        let object = viewModel.getObject(at: 0)
 
         // Then
-        XCTAssertEqual(object?.id, service.events.first?.id)
+        XCTAssertEqual(object?.event.id, "0")
     }
 
     func testGetImageUrls() {
         // Given
+        let service = HomeServiceSuccessStub()
+        let viewModel = HomeViewModel(service: service)
+
         viewModel.fetchEvents()
 
         // When
         let imageUrls = viewModel.getImagesUrls(at: [IndexPath(row: 0, section: 0)])
 
         // Then
-        let url = URL(string: "http://lproweb.procempa.com.br/pmpa/prefpoa/seda_news/usu_img/Papel%20de%20Parede.png")
+        let url = URL(string: "www.google.com")
         XCTAssertEqual([url], imageUrls)
-    }
-}
-
-class HomeServiceSpy: HomeServiceProtocol {
-    var fetchCalled = false
-    var shouldFail = false
-    private(set) var events: Events
-
-    enum SpyErrors: Error {
-        case `default`
-    }
-
-    init(events: Events) {
-        self.events = events
-    }
-
-    func fetchEvents(completionHandler: @escaping FetchEventsCompletionHandler) {
-        fetchCalled = true
-        if shouldFail {
-            completionHandler(.failure(SpyErrors.default))
-        } else {
-            completionHandler(.success(events))
-        }
     }
 }
 

@@ -10,36 +10,11 @@ import XCTest
 import CoreLocation
 @testable import WoopEvents
 
-class EventDetailViewModelTests: XCTestCase {
-    var viewModel: EventDetailViewModel!
-    var service: EventDetailtServiceSpy!
-    var navigation: EventNavigationSpy!
-
-    override func setUp() {
-        super.setUp()
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-
-        let event = Event(id: "1",
-                          title: "Encontro regional ONGS",
-                          price: 10.0,
-                          latitude: 11.0,
-                          longitude: 10.0,
-                          //swiftlint:disable force_unwrapping
-            image: URL(string: "www.google.com")!,
-            eventDescription: "Encontro para discutir soluções voltadas a engajamento e captação de recursos",
-            //swiftlint:disable force_unwrapping
-            date: dateFormatter.date(from: "23/09/1990 06:00")!,
-            people: [],
-            cupons: [])
-
-        navigation = EventNavigationSpy()
-        service = EventDetailtServiceSpy()
-        viewModel = EventDetailViewModel(service: service, navigationDelegate: navigation, event: event)
-    }
+final class EventDetailViewModelTests: XCTestCase {
 
     func testConstructor() {
+        let viewModel = EventDetailViewModel(event: Event.stub(withID: "123"))
+
         XCTAssertEqual(viewModel.eventDay, "23")
         XCTAssertEqual(viewModel.eventTitle, "Encontro regional ONGS")
         XCTAssertEqual(viewModel.eventMonth, "set")
@@ -48,6 +23,7 @@ class EventDetailViewModelTests: XCTestCase {
         let location = CLLocationCoordinate2D(latitude: 11.0, longitude: 10.0)
         XCTAssertEqual(viewModel.eventLocation.longitude, location.longitude)
         XCTAssertEqual(viewModel.eventLocation.latitude, location.latitude)
+        //swiftlint:disable force_unwrapping
         XCTAssertEqual(viewModel.eventImageUrl, URL(string: "www.google.com")!)
         XCTAssertNil(viewModel.error.value)
         XCTAssertFalse(viewModel.loading.value)
@@ -56,6 +32,9 @@ class EventDetailViewModelTests: XCTestCase {
 
     func testCheckinSuccess() {
         // Given
+        let successService = EventDetailtServiceSuccessStub()
+        let event = Event.stub(withID: "123")
+        let viewModel = EventDetailViewModel(service: successService, event: event)
         let observer = DynamicObserver<Bool>()
         viewModel.loading.setObserver(with: observer)
 
@@ -63,7 +42,7 @@ class EventDetailViewModelTests: XCTestCase {
         viewModel.checkIn()
 
         // Then
-        XCTAssertTrue(service.checkInCalled)
+        XCTAssertTrue(successService.checkInCalled)
         XCTAssertEqual(observer.values, [true, false])
         XCTAssertTrue(viewModel.checkInResult.value)
         XCTAssertNil(viewModel.error.value)
@@ -71,16 +50,17 @@ class EventDetailViewModelTests: XCTestCase {
 
     func testCheckinFailure() {
         // Given
+        let errorService = EventDetailtServiceErrorStub()
+        let event = Event.stub(withID: "123")
+        let viewModel = EventDetailViewModel(service: errorService, event: event)
         let observer = DynamicObserver<Bool>()
         viewModel.loading.setObserver(with: observer)
-
-        service.shouldFail = true
 
         // When
         viewModel.checkIn()
 
         // Then
-        XCTAssertTrue(service.checkInCalled)
+        XCTAssertTrue(errorService.checkInCalled)
         XCTAssertEqual(observer.values, [true, false])
         XCTAssertFalse(viewModel.checkInResult.value)
         XCTAssertNotNil(viewModel.error.value)
@@ -88,31 +68,15 @@ class EventDetailViewModelTests: XCTestCase {
 
     func testTapSharedShouldCallNavigation() {
         // Given
-        // setUp()
+        let event = Event.stub(withID: "123")
+        let navigation = EventNavigationSpy()
+        let viewModel = EventDetailViewModel(navigationDelegate: navigation, event: event)
 
         // When
         viewModel.shareObjects([])
 
         // Then
         XCTAssertTrue(navigation.didTapShareCalled)
-    }
-}
-
-class EventDetailtServiceSpy: EventDetailServiceProtocol {
-    var checkInCalled = false
-    var shouldFail = false
-
-    enum SpyError: Error {
-        case `default`
-    }
-
-    func checkin(with requestObject: EventCheckInRequestObject, completionHandler: @escaping CheckInCompletionHandler) {
-        checkInCalled = true
-        if shouldFail {
-            completionHandler(.failure(SpyError.default))
-        } else {
-            completionHandler(.success(true))
-        }
     }
 }
 
