@@ -12,15 +12,15 @@ import Kingfisher
 final class HomeTableViewCell: UITableViewCell {
     static let identifier = "HomeTableViewCell"
 
-    @IBOutlet private(set) weak var eventImageView: UIImageView! {
+    @IBOutlet private weak var eventImageView: UIImageView! {
         didSet {
             eventImageView.kf.indicatorType = .activity
         }
     }
-    @IBOutlet private(set) weak var eventTitleLabel: UILabel!
-    @IBOutlet private(set) weak var eventDayLabel: UILabel!
-    @IBOutlet private(set) weak var eventMonthLabel: UILabel!
-    @IBOutlet private(set) weak var eventDescriptionLabel: UILabel!
+    @IBOutlet private weak var eventTitleLabel: UILabel!
+    @IBOutlet private weak var eventDayLabel: UILabel!
+    @IBOutlet private weak var eventMonthLabel: UILabel!
+    @IBOutlet private weak var eventDescriptionLabel: UILabel!
     var viewModel: HomeCellViewModelProtocol!
 
     // MARK: Life Cycle

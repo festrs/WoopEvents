@@ -21,7 +21,6 @@ class UIViewControllerTests: XCTestCase {
 
     private func loadView() {
         window.addSubview(viewController.view)
-        RunLoop.current.run(until: Date())
     }
 
     override func tearDown() {

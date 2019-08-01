@@ -108,13 +108,13 @@ class HomeTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? HomeTableViewCell else { return }
-        if let cellViewModel = viewModel[indexPath.row] {
+        if let cellViewModel = viewModel.getObject(at: indexPath.row) {
             cell.config(viewModel: cellViewModel)
         }
     }
 
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cellViewModel = viewModel[indexPath.row] {
+        if let cellViewModel = viewModel.getObject(at: indexPath.row) {
             cellViewModel.cancelImageDownload()
         }
     }

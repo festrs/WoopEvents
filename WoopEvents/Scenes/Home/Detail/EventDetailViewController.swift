@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class EventDetailViewController: UIViewController {
-    struct Constants {
+    private enum Constants {
         static let checkinSucessMsg = String.localized(by: "HomeDetailCheckInSuccessTitle")
         static let checkinSucessTitle = String.localized(by: "HomeDetailCheckInSuccessTitle")
         static let checkinErrorTitle = String.localized(by: "HomeDetailErrorTitle")
@@ -20,32 +20,32 @@ class EventDetailViewController: UIViewController {
     }
 
     let viewModel: EventDetailViewModelProtocol
-    @IBOutlet private(set) weak var mapView: MKMapView!
-    @IBOutlet private(set) weak var eventImageView: UIImageView!
-    @IBOutlet private(set) weak var eventTitleLabel: UILabel!
-    @IBOutlet private(set) weak var eventDayLabel: UILabel!
-    @IBOutlet private(set) weak var eventMonthLabel: UILabel!
-    @IBOutlet private(set) weak var eventDescriptionLabel: UILabel!
-    @IBOutlet private(set) weak var eventTimeLabel: UILabel!
-    @IBOutlet private(set) weak var shareButtonTitleLabel: UILabel! {
+    @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var eventImageView: UIImageView!
+    @IBOutlet private weak var eventTitleLabel: UILabel!
+    @IBOutlet private weak var eventDayLabel: UILabel!
+    @IBOutlet private weak var eventMonthLabel: UILabel!
+    @IBOutlet private weak var eventDescriptionLabel: UILabel!
+    @IBOutlet private weak var eventTimeLabel: UILabel!
+    @IBOutlet private weak var shareButtonTitleLabel: UILabel! {
         didSet {
             shareButtonTitleLabel.text = Constants.sharedButtonTitle
         }
     }
-    @IBOutlet private(set) weak var checkinButtonTitleLabel: UILabel! {
+    @IBOutlet private weak var checkinButtonTitleLabel: UILabel! {
         didSet {
             checkinButtonTitleLabel.text = Constants.checkInButtonTitle
         }
     }
-    @IBOutlet private(set) weak var detailsLabel: UILabel! {
+    @IBOutlet private weak var detailsLabel: UILabel! {
         didSet {
             detailsLabel.text = Constants.detailsTitle
         }
     }
-    @IBOutlet private(set) weak var checkinButton: UIButton!
-    @IBOutlet private(set) weak var shareButton: UIButton!
-    @IBOutlet private(set) weak var loaderView: UIView!
-    @IBOutlet private(set) weak var loaderActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var checkinButton: UIButton!
+    @IBOutlet private weak var shareButton: UIButton!
+    @IBOutlet private weak var loaderView: UIView!
+    @IBOutlet private weak var loaderActivityIndicator: UIActivityIndicatorView!
 
     // MARK: - Life Cycle
     init(viewModel: EventDetailViewModelProtocol) {

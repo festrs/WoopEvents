@@ -8,9 +8,7 @@
 
 import Foundation
 
-typealias Events = [Event]
-
-struct FailableDecodable<Base : Decodable> : Decodable {
+struct FailableDecodable<Base: Decodable>: Decodable {
     let base: Base?
 
     init(from decoder: Decoder) throws {
@@ -19,43 +17,48 @@ struct FailableDecodable<Base : Decodable> : Decodable {
     }
 }
 
+typealias Events = [Event]
+
 struct Event: Decodable {
     let id, title: String
-    let price: Double
-    let latitude, longitude: Double
-    let image: URL
-    let eventDescription: String
-    let date: Date
-    let people: [Person]
-    let cupons: [Cupon]
+    var price: Double
+    var latitude, longitude: Double
+    var image: URL
+    var eventDescription: String
+    var date: Date
+    var people: [Person]
+    var cupons: [Cupon]
 
     enum CodingKeys: String, CodingKey {
         case id, title, price, latitude, longitude, image
         case eventDescription = "description"
         case date, people, cupons
     }
-}
 
-// MARK: - Cupon
-struct Cupon: Decodable {
-    let id, eventID: String
-    let discount: Int
+    // MARK: - Cupon
+    struct Cupon: Decodable {
+        let id, eventID: String
+        var discount: Int
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case eventID = "eventId"
-        case discount
+        //swiftlint:disable nesting
+        enum CodingKeys: String, CodingKey {
+            case id
+            case eventID = "eventId"
+            case discount
+        }
     }
-}
 
-// MARK: - Person
-struct Person: Decodable {
-    let id, eventID, name: String
-    let picture: String
+    // MARK: - Person
+    struct Person: Decodable {
+        let id, eventID: String
+        var name: String
+        var picture: String
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case eventID = "eventId"
-        case name, picture
+        //swiftlint:disable nesting
+        enum CodingKeys: String, CodingKey {
+            case id
+            case eventID = "eventId"
+            case name, picture
+        }
     }
 }

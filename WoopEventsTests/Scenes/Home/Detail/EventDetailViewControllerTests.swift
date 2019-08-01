@@ -10,16 +10,13 @@ import XCTest
 import CoreLocation
 @testable import WoopEvents
 
-class EventDetailViewControllerTests: XCTestCase {
+final class EventDetailViewControllerTests: XCTestCase {
     var window: UIWindow!
-    var viewController: EventDetailViewController!
-    var viewModel: EventDetailViewModelSpy!
+    var viewModel: EventDetailViewModelStub = EventDetailViewModelStub()
 
     override func setUp() {
         super.setUp()
         window = UIWindow(frame: UIScreen.main.bounds)
-        viewModel = EventDetailViewModelSpy()
-        viewController = EventDetailViewController(viewModel: viewModel)
     }
 
     override func tearDown() {
@@ -27,14 +24,15 @@ class EventDetailViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    private func loadView() {
+    private func loadView(viewController: UIViewController) {
         window.addSubview(viewController.view)
         RunLoop.current.run(until: Date())
     }
 
     func testViewDidLoadShouldBindVariables() {
         // Given
-        loadView()
+        let viewController = EventDetailViewController(viewModel: viewModel)
+        loadView(viewController: viewController)
 
         // When
         viewController.viewDidLoad()
@@ -47,26 +45,30 @@ class EventDetailViewControllerTests: XCTestCase {
 
     func testViewDidLoadShouldUpdateUI() {
         // Given
-        loadView()
+        let eventViewController = EventDetailViewController(viewModel: viewModel)
+        loadView(viewController: eventViewController)
 
         // When
-        viewController.viewDidAppear(true)
+        eventViewController.viewDidAppear(true)
 
         // Then
-        XCTAssertEqual(viewController.eventTitleLabel.text, "Titulo")
-        XCTAssertEqual(viewController.eventDayLabel.text, "23")
-        XCTAssertEqual(viewController.eventTimeLabel.text, "23 de setembro de 1990 06:00")
-        XCTAssertEqual(viewController.eventDescriptionLabel.text, "Descrição")
-        XCTAssertEqual(viewController.eventMonthLabel.text, "set")
-        XCTAssertEqual(viewController.mapView.annotations.count, 1)
+        let viewController = EventDetailViewControllerMirror(viewController: eventViewController)
+        XCTAssertEqual(viewController.eventTitleLabel?.text, "Titulo")
+        XCTAssertEqual(viewController.eventDayLabel?.text, "23")
+        XCTAssertEqual(viewController.eventTimeLabel?.text, "23 de setembro de 1990 06:00")
+        XCTAssertEqual(viewController.eventDescriptionLabel?.text, "Descrição")
+        XCTAssertEqual(viewController.eventMonthLabel?.text, "set")
+        XCTAssertEqual(viewController.mapView?.annotations.count, 1)
     }
 
     func testShouldSendActionsWhenTapCheckInButton() {
         // Given
-        loadView()
+        let eventViewController = EventDetailViewController(viewModel: viewModel)
+        loadView(viewController: eventViewController)
 
         // When
-        viewController.checkinButton.sendActions(for: .touchUpInside)
+        let viewController = EventDetailViewControllerMirror(viewController: eventViewController)
+        viewController.checkinButton?.sendActions(for: .touchUpInside)
 
         // Then
         XCTAssertTrue(viewModel.checkinCalled)
@@ -74,17 +76,19 @@ class EventDetailViewControllerTests: XCTestCase {
 
     func testShouldShowActivityWhenTapShareButton() {
         // Given
-        loadView()
+        let eventViewController = EventDetailViewController(viewModel: viewModel)
+        loadView(viewController: eventViewController)
 
         // When
-        viewController.shareButton.sendActions(for: .touchUpInside)
+        let viewController = EventDetailViewControllerMirror(viewController: eventViewController)
+        viewController.shareButton?.sendActions(for: .touchUpInside)
 
         // Then
         XCTAssertTrue(viewModel.shareObjectsCalled)
     }
 }
 
-class EventDetailViewModelSpy: EventDetailViewModelProtocol {
+final class EventDetailViewModelStub: EventDetailViewModelProtocol {
     var eventTitle: String = "Titulo"
     var eventDay: String = "23"
     var eventMonth: String = "set"
