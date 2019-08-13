@@ -19,8 +19,9 @@ struct FailableDecodable<Base: Decodable>: Decodable {
 
 typealias Events = [Event]
 
-struct Event: Decodable {
-    let id, title: String
+struct Event: Identifiable, Codable {
+    let id: Identifier<Event>
+    let title: String
     var price: Double
     var latitude, longitude: Double
     var image: URL
@@ -36,7 +37,7 @@ struct Event: Decodable {
     }
 
     // MARK: - Cupon
-    struct Cupon: Decodable {
+    struct Cupon: Codable {
         let id, eventID: String
         var discount: Int
 
@@ -49,7 +50,7 @@ struct Event: Decodable {
     }
 
     // MARK: - Person
-    struct Person: Decodable {
+    struct Person: Codable {
         let id, eventID: String
         var name: String
         var picture: String

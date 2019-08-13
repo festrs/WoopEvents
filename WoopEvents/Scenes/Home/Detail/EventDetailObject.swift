@@ -9,7 +9,7 @@
 import Foundation
 
 struct EventCheckInRequestObject: Encodable {
-    var eventId: String
+    var eventId: Identifier<Event>
     var name: String
     var email: String
 }

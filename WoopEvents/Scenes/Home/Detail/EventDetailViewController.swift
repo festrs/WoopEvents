@@ -9,16 +9,7 @@
 import UIKit
 import MapKit
 
-class EventDetailViewController: UIViewController {
-    private enum Constants {
-        static let checkinSucessMsg = String.localized(by: "HomeDetailCheckInSuccessTitle")
-        static let checkinSucessTitle = String.localized(by: "HomeDetailCheckInSuccessTitle")
-        static let checkinErrorTitle = String.localized(by: "HomeDetailErrorTitle")
-        static let checkInButtonTitle = String.localized(by: "HomeDetailCheckinButtonTitle")
-        static let sharedButtonTitle = String.localized(by: "HomeDetailShareButtonTitle")
-        static let detailsTitle = String.localized(by: "HomeDetailDetailsTitle")
-    }
-
+final class EventDetailViewController: UIViewController {
     let viewModel: EventDetailViewModelProtocol
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var eventImageView: UIImageView!
@@ -27,21 +18,9 @@ class EventDetailViewController: UIViewController {
     @IBOutlet private weak var eventMonthLabel: UILabel!
     @IBOutlet private weak var eventDescriptionLabel: UILabel!
     @IBOutlet private weak var eventTimeLabel: UILabel!
-    @IBOutlet private weak var shareButtonTitleLabel: UILabel! {
-        didSet {
-            shareButtonTitleLabel.text = Constants.sharedButtonTitle
-        }
-    }
-    @IBOutlet private weak var checkinButtonTitleLabel: UILabel! {
-        didSet {
-            checkinButtonTitleLabel.text = Constants.checkInButtonTitle
-        }
-    }
-    @IBOutlet private weak var detailsLabel: UILabel! {
-        didSet {
-            detailsLabel.text = Constants.detailsTitle
-        }
-    }
+    @IBOutlet private weak var shareButtonTitleLabel: UILabel!
+    @IBOutlet private weak var checkinButtonTitleLabel: UILabel!
+    @IBOutlet private weak var detailsLabel: UILabel!
     @IBOutlet private weak var checkinButton: UIButton!
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var loaderView: UIView!
@@ -72,30 +51,31 @@ class EventDetailViewController: UIViewController {
 
     // MARK: Functions
     private func configBind() {
+        eventTitleLabel.text = viewModel.eventTitle
         eventImageView.kf.setImage(with: viewModel.eventImageUrl)
         eventTitleLabel.text = viewModel.eventTitle
         eventDayLabel.text = viewModel.eventDay
         eventMonthLabel.text = viewModel.eventMonth
         eventDescriptionLabel.text = viewModel.eventDescription
         eventTimeLabel.text = viewModel.eventFullDate
+        shareButtonTitleLabel.text = viewModel.sharedButtonTitle
+        checkinButtonTitleLabel.text = viewModel.checkInButtonTitle
+        detailsLabel.text = viewModel.detailsTitle
 
         configMap()
 
-        viewModel.checkInResult.bind { [weak self] _ in
-            guard let self = self else { return }
-            self.presentAlert(with: Constants.checkinSucessTitle, and: Constants.checkinSucessMsg)
+        viewModel.checkInResult.addObservation(for: self) { (viewController, checkInResult) in
+            guard checkInResult.checkInResult else { return }
+
+            viewController.presentAlert(with: checkInResult.title ?? "", and: checkInResult.msg ?? "")
         }
 
-        viewModel.error.bind { [weak self] errorMsg in
-            guard let self = self,
-                let errorMsg = errorMsg else { return }
-            self.presentAlert(with: Constants.checkinErrorTitle, and: errorMsg)
-        }
+        viewModel.requestModel.addObservation(for: self) { (viewController, viewModel) in
+            viewModel.loading ? viewController.showLoader() : viewController.hideLoader()
 
-        viewModel.loading.bind { [weak self] isLoading in
-            guard let self = self else { return }
-            isLoading ? self.showLoader() : self.hideLoader()
-            UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
+            guard let error = viewModel.error else { return }
+
+            viewController.presentAlert(with: viewModel.errorTitle ?? "", and: error)
         }
     }
 
@@ -104,7 +84,7 @@ class EventDetailViewController: UIViewController {
         eventLocation.coordinate = viewModel.eventLocation
         mapView.addAnnotation(eventLocation)
 
-        centerMapOnLocation(viewModel.eventLocation, mapView: mapView)
+        centerMapOnLocation(eventLocation.coordinate, mapView: mapView)
     }
 
     private func centerMapOnLocation(_ location: CLLocationCoordinate2D, mapView: MKMapView) {

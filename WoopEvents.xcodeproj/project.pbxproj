@@ -27,7 +27,7 @@
 		3A5EE10F229F0D1700CAFA52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5EE10E229F0D1700CAFA52 /* Localizable.strings */; };
 		3A5EE112229F0D3E00CAFA52 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE111229F0D3E00CAFA52 /* String+Extension.swift */; };
 		3A5EE123229F121300CAFA52 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE122229F121300CAFA52 /* AppCoordinator.swift */; };
-		3A5EE13E229F140600CAFA52 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE13D229F140600CAFA52 /* Dynamic.swift */; };
+		3A5EE13E229F140600CAFA52 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE13D229F140600CAFA52 /* Bindable.swift */; };
 		3A5EE14A229F15FB00CAFA52 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE144229F15FB00CAFA52 /* HomeCoordinator.swift */; };
 		3A5EE14B229F15FB00CAFA52 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE145229F15FB00CAFA52 /* Event.swift */; };
 		3A5EE14E229F15FB00CAFA52 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE148229F15FB00CAFA52 /* HomeViewModel.swift */; };
@@ -48,13 +48,15 @@
 		3A5EE18622A09AA000CAFA52 /* EventDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5EE18422A09AA000CAFA52 /* EventDetailViewController.xib */; };
 		3A5EE18922A0B5AC00CAFA52 /* HomeDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE18822A0B5AC00CAFA52 /* HomeDetailRoute.swift */; };
 		3A5EE18B22A0B63500CAFA52 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE18A22A0B63500CAFA52 /* Encodable+Extension.swift */; };
-		3A5EE18D22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE18C22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift */; };
 		3A5EE19122A1268400CAFA52 /* EncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19022A1268400CAFA52 /* EncodableTests.swift */; };
 		3A5EE19522A1291C00CAFA52 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19422A1291C00CAFA52 /* UIViewController+Extension.swift */; };
 		3A5EE19722A1296D00CAFA52 /* UIViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19622A1296D00CAFA52 /* UIViewControllerTests.swift */; };
 		3A5EE19922A138D700CAFA52 /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
 		3A5EE19B22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */; };
+		3A9CDA7822FA290400232D24 /* ServiceModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CDA7722FA290400232D24 /* ServiceModelController.swift */; };
+		3A9CDA7A22FC5BA900232D24 /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CDA7922FC5BA900232D24 /* Sequence+Extension.swift */; };
 		3AA657CF22EB8E5700A55A82 /* MirrorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA657CE22EB8E5700A55A82 /* MirrorObject.swift */; };
+		3AD284E523017D8400ABC801 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD284E423017D8400ABC801 /* Identifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +91,7 @@
 		3A5EE10E229F0D1700CAFA52 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3A5EE111229F0D3E00CAFA52 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		3A5EE122229F121300CAFA52 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		3A5EE13D229F140600CAFA52 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		3A5EE13D229F140600CAFA52 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		3A5EE144229F15FB00CAFA52 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		3A5EE145229F15FB00CAFA52 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3A5EE148229F15FB00CAFA52 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -113,13 +115,15 @@
 		3A5EE18422A09AA000CAFA52 /* EventDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailViewController.xib; sourceTree = "<group>"; };
 		3A5EE18822A0B5AC00CAFA52 /* HomeDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailRoute.swift; sourceTree = "<group>"; };
 		3A5EE18A22A0B63500CAFA52 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
-		3A5EE18C22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModelProtocol.swift; sourceTree = "<group>"; };
 		3A5EE19022A1268400CAFA52 /* EncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableTests.swift; sourceTree = "<group>"; };
 		3A5EE19422A1291C00CAFA52 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3A5EE19622A1296D00CAFA52 /* UIViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerTests.swift; sourceTree = "<group>"; };
 		3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModelTests.swift; sourceTree = "<group>"; };
 		3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewControllerTests.swift; sourceTree = "<group>"; };
+		3A9CDA7722FA290400232D24 /* ServiceModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModelController.swift; sourceTree = "<group>"; };
+		3A9CDA7922FC5BA900232D24 /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		3AA657CE22EB8E5700A55A82 /* MirrorObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorObject.swift; sourceTree = "<group>"; };
+		3AD284E423017D8400ABC801 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +226,9 @@
 			isa = PBXGroup;
 			children = (
 				3A5EE103229F045D00CAFA52 /* Environment.swift */,
-				3A5EE13D229F140600CAFA52 /* Dynamic.swift */,
+				3A5EE13D229F140600CAFA52 /* Bindable.swift */,
+				3A9CDA7722FA290400232D24 /* ServiceModelController.swift */,
+				3AD284E423017D8400ABC801 /* Identifier.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -231,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				3A5EE10A229F0BD100CAFA52 /* CoordinatorProtocols.swift */,
-				3A5EE18C22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				3A5EE16B229FE70500CAFA52 /* DateFormatter+Extension.swift */,
 				3A5EE18A22A0B63500CAFA52 /* Encodable+Extension.swift */,
 				3A5EE19422A1291C00CAFA52 /* UIViewController+Extension.swift */,
+				3A9CDA7922FC5BA900232D24 /* Sequence+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -383,11 +389,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A5EE0F0229EF7EE00CAFA52 /* Build configuration list for PBXNativeTarget "WoopEvents" */;
 			buildPhases = (
+				3AD284E72301931200ABC801 /* Log Build Time */,
 				3A5EE0CF229EF7ED00CAFA52 /* Sources */,
 				3A5EE0D0229EF7ED00CAFA52 /* Frameworks */,
 				3A5EE0D1229EF7ED00CAFA52 /* Resources */,
 				3A5EE0F6229EFBC900CAFA52 /* Swift Lint */,
 				3A5EE0F7229EFBE600CAFA52 /* Carthage */,
+				3AD284E82301935100ABC801 /* Log Build Time End */,
 			);
 			buildRules = (
 			);
@@ -516,6 +524,42 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		3AD284E72301931200ABC801 /* Log Build Time */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Log Build Time";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"$(date +%s)\" > \"buildtimes.log\"\n";
+		};
+		3AD284E82301935100ABC801 /* Log Build Time End */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Log Build Time End";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "startime=$(<buildtimes.log)\nendtime=$(date +%s)\ndeltatime=$((endtime-startime))\nnewline=$'\\n'\necho \"[Start] $startime$newline[End] $endtime$newline[Delta] $deltatime\" > \"buildtimes.log\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -523,7 +567,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A5EE13E229F140600CAFA52 /* Dynamic.swift in Sources */,
+				3A5EE13E229F140600CAFA52 /* Bindable.swift in Sources */,
 				3A5EE18B22A0B63500CAFA52 /* Encodable+Extension.swift in Sources */,
 				3A5EE18922A0B5AC00CAFA52 /* HomeDetailRoute.swift in Sources */,
 				3A5EE14E229F15FB00CAFA52 /* HomeViewModel.swift in Sources */,
@@ -533,20 +577,22 @@
 				3A5EE10B229F0BD100CAFA52 /* CoordinatorProtocols.swift in Sources */,
 				3A5EE17422A0844D00CAFA52 /* HomeTableViewController.swift in Sources */,
 				3A5EE112229F0D3E00CAFA52 /* String+Extension.swift in Sources */,
+				3AD284E523017D8400ABC801 /* Identifier.swift in Sources */,
 				3A5EE14F229F15FB00CAFA52 /* HomeService.swift in Sources */,
 				3A5EE14A229F15FB00CAFA52 /* HomeCoordinator.swift in Sources */,
 				3A5EE18222A09A7B00CAFA52 /* EventDetailService.swift in Sources */,
+				3A9CDA7822FA290400232D24 /* ServiceModelController.swift in Sources */,
 				3A5EE19522A1291C00CAFA52 /* UIViewController+Extension.swift in Sources */,
 				3A5EE18122A09A7B00CAFA52 /* EventDetailViewModel.swift in Sources */,
 				3A5EE18522A09AA000CAFA52 /* EventDetailViewController.swift in Sources */,
 				3A5EE104229F045D00CAFA52 /* Environment.swift in Sources */,
-				3A5EE18D22A0BA8A00CAFA52 /* RequestViewModelProtocol.swift in Sources */,
 				3A5EE108229F067500CAFA52 /* APIManager.swift in Sources */,
 				3A5EE14B229F15FB00CAFA52 /* Event.swift in Sources */,
 				3A5EE106229F05B200CAFA52 /* APIManagerProtocols.swift in Sources */,
 				3A5EE160229F1A3300CAFA52 /* HomeCellViewModel.swift in Sources */,
 				3A5EE16C229FE70500CAFA52 /* DateFormatter+Extension.swift in Sources */,
 				3A5EE0D7229EF7ED00CAFA52 /* AppDelegate.swift in Sources */,
+				3A9CDA7A22FC5BA900232D24 /* Sequence+Extension.swift in Sources */,
 				3A5EE123229F121300CAFA52 /* AppCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,6 +764,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.felipep.WoopEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -741,6 +789,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.felipep.WoopEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

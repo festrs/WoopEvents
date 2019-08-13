@@ -8,18 +8,22 @@
 
 import Foundation
 
-enum HomeDetailRoute: APIRoute {
-    case checkIn(EventCheckInRequestObject)
+struct HomeDetailRoute: APIRoute {
+    var config: RequestConfig
 
-    var config: RequestConfig {
-        switch self {
-        case .checkIn(let object):
-            let parameters = try? object.asDictionary()
-            let config = RequestConfig(path: "checkin",
-                                       method: .post,
-                                       encoding: .default,
-                                       parameters: parameters ?? [:])
-            return config
-        }
+    private init(with config: RequestConfig) {
+        self.config = config
+    }
+}
+
+extension HomeDetailRoute {
+    static func checkIn(with parameter: EventCheckInRequestObject) -> HomeDetailRoute {
+        let parameters = try? parameter.asDictionary()
+        let config = RequestConfig(path: "checkin",
+                                   method: .post,
+                                   encoding: .default,
+                                   parameters: parameters ?? [:])
+
+        return HomeDetailRoute(with: config)
     }
 }

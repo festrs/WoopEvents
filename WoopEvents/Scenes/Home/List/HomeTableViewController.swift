@@ -9,18 +9,18 @@
 import UIKit
 import Kingfisher
 
-class HomeTableViewController: UITableViewController {
-    struct Constants {
-        static let emptyMsg = String.localized(by: "HomeEmptyMsg")
+final class HomeTableViewController: UITableViewController {
+    private enum Constants {
         static let tableViewCellHeight: CGFloat = 138.0
     }
 
     let viewModel: HomeViewModelProtocol
-    let errorLabel: UILabel = {
+    private lazy var errorLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.isHidden = true
+        label.text = viewModel.emptyMsg
         return label
     }()
 
@@ -50,35 +50,21 @@ class HomeTableViewController: UITableViewController {
 
     // MARK: - Functions
     private func configBind() {
-        viewModel.events.bind { [weak self] events in
-            guard let self = self else { return }
-            self.tableView.reloadData()
+        viewModel.updateHandler = tableView.reloadData
 
-            if events.isEmpty {
-                self.errorLabel.text = HomeTableViewController.Constants.emptyMsg
-                self.errorLabel.isHidden = false
-            } else {
-                self.errorLabel.isHidden = true
-            }
+        viewModel.requestModel.addObservation(for: self) { (viewController, viewModel) in
+            viewModel.loading ? viewController.refreshControl?.beginRefreshing() : viewController.refreshControl?.endRefreshing()
+
+            guard let error = viewModel.error else { return }
+            viewController.errorLabel.text = error
         }
 
-        viewModel.loading.bindAndFire { [weak self] isLoading in
-            guard let self = self else { return }
-            isLoading ? self.refreshControl?.beginRefreshing() : self.refreshControl?.endRefreshing()
-            UIApplication.shared.isNetworkActivityIndicatorVisible = isLoading
-        }
-
-        viewModel.error.bind { [weak self] error in
-            guard let self = self else { return }
-            self.errorLabel.text = error
-            self.errorLabel.isHidden = false
-        }
+        viewModel.errorIsHidden.bind(to: \.isHidden, on: errorLabel)
     }
 
     private func configTableView() {
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.refreshControl = refreshControl
         tableView.register(UINib(nibName: HomeTableViewCell.identifier, bundle: nil),
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
         tableView.backgroundView = errorLabel
@@ -87,6 +73,7 @@ class HomeTableViewController: UITableViewController {
         newRefreshControl.addTarget(self, action: #selector(refreshEventsData), for: .valueChanged)
 
         refreshControl = newRefreshControl
+        tableView.refreshControl = refreshControl
     }
 
     // MARK: - Actions

@@ -12,9 +12,11 @@ protocol HomeNavigationProtocol: AnyObject {
     func didSelectEvent(_ event: Event)
 }
 
-protocol HomeViewModelProtocol: RequestViewModelProtocol {
-    var events: Dynamic<[HomeCellViewModelProtocol]> { get }
+protocol HomeViewModelProtocol: ServiceModelControllerProtocol {
+    var updateHandler: () -> Void { get set }
     var title: String { get }
+    var errorIsHidden: Bindable<Bool> { get }
+    var emptyMsg: String { get }
 
     func getImagesUrls(at indexPaths: [IndexPath]) -> [URL]
     func eventsCount() -> Int
@@ -24,14 +26,17 @@ protocol HomeViewModelProtocol: RequestViewModelProtocol {
 }
 
 class HomeViewModel {
-    let error: Dynamic<String?> = Dynamic(nil)
-    let events: Dynamic<[HomeCellViewModelProtocol]> = Dynamic([])
-    let loading: Dynamic<Bool> = Dynamic(false)
-    let title: String = String.localized(by: "HomeTitle")
-    private var service: HomeServiceProtocol
+    var updateHandler: () -> Void = {}
+    var requestModel: Bindable<RequestViewModel>  = Bindable(.loading(isLoading: false))
+    var title: String = String.localized(by: "HomeTitle")
+    var emptyMsg: String = String.localized(by: "HomeEmptyMsg")
+    var errorIsHidden: Bindable<Bool> = Bindable(true)
     private weak var navigationDelegate: HomeNavigationProtocol?
+    private var service: HomeServiceProtocol
+    private var events: [HomeCellViewModelProtocol] = []
 
-    init(service: HomeServiceProtocol = HomeService(), navigationDelegate: HomeNavigationProtocol? = nil) {
+    init(service: HomeServiceProtocol = HomeService(),
+         navigationDelegate: HomeNavigationProtocol? = nil) {
         self.service = service
         self.navigationDelegate = navigationDelegate
     }
@@ -40,7 +45,7 @@ class HomeViewModel {
 extension HomeViewModel: HomeViewModelProtocol {
     func getImagesUrls(at indexPaths: [IndexPath]) -> [URL] {
         let validIndexPaths = indexPaths.map { $0.row }
-        let eventsUrls = events.value.enumerated().lazy.filter {
+        let eventsUrls = events.enumerated().lazy.filter {
             validIndexPaths.contains($0.offset)
         }.compactMap { (_, object) in
             return object.event.image
@@ -49,36 +54,46 @@ extension HomeViewModel: HomeViewModelProtocol {
     }
 
     func fetchEvents() {
-        loading.value = true
+    	requestModel.update(with: .loading(isLoading: true))
         service.request(path: .fetchEvents) { result in
-            self.loading.value = false
+            self.requestModel.update(with: .loading(isLoading: false))
 
             switch result {
             case .success(let objects):
-                self.events.value = objects.map { HomeCellViewModel(event: $0) }
+                self.errorIsHidden.update(with: true)
+                self.events = objects.lazy.map { HomeCellViewModel(event: $0) }.sorted(by: \.event.date)
+                if Thread.isMainThread {
+					self.updateHandler()
+                } else {
+                    DispatchQueue.main.async {
+                        self.updateHandler()
+                    }
+                }
 
             case .failure(let error):
-                self.error.value = error.localizedDescription
+                self.errorIsHidden.update(with: false)
+                self.requestModel.update(with: .error(title: "",
+                                                      message: error.localizedDescription))
             }
         }
     }
 
     func getObject(at row: Int) -> HomeCellViewModelProtocol? {
-        guard events.value.indices.contains(row) else {
+        guard events.indices.contains(row) else {
             return nil
         }
-        return events.value[row]
+        return events[row]
     }
 
     func didTapCell(at indexPath: IndexPath) {
-        guard events.value.indices.contains(indexPath.row) else {
+        guard events.indices.contains(indexPath.row) else {
             return
         }
-        let event = events.value[indexPath.row].event
+        let event = events[indexPath.row].event
         navigationDelegate?.didSelectEvent(event)
     }
 
     func eventsCount() -> Int {
-        return events.value.count
+        return events.count
     }
 }
