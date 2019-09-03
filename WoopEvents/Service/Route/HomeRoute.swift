@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol APIRoute {
+  var config: RequestConfig { get }
+}
+
 enum HomeRoute: APIRoute {
     case fetchEvents
 

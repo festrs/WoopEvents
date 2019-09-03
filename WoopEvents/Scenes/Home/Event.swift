@@ -37,8 +37,9 @@ struct Event: Identifiable, Codable {
     }
 
     // MARK: - Cupon
-    struct Cupon: Codable {
-        let id, eventID: String
+    struct Cupon: Identifiable, Codable {
+        let id: Identifier<Event.Cupon>
+      	let eventID: Identifier<Event>
         var discount: Int
 
         //swiftlint:disable nesting
@@ -50,8 +51,9 @@ struct Event: Identifiable, Codable {
     }
 
     // MARK: - Person
-    struct Person: Codable {
-        let id, eventID: String
+    struct Person: Identifiable, Codable {
+      	let id: Identifier<Event.Person>
+      	let eventID: Identifier<Event>
         var name: String
         var picture: String
 

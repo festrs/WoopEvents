@@ -25,6 +25,6 @@ class EventDetailService {
 
 extension EventDetailService: EventDetailServiceProtocol {
     func request(path route: HomeDetailRoute, completionHandler: @escaping CheckInCompletionHandler) {
-        service.request(with: route.config, completion: completionHandler)
+        service.receive(on: DispatchQueue.main).request(with: route.config, completion: completionHandler)
     }
 }

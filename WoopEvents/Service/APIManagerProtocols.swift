@@ -12,6 +12,9 @@ import Alamofire
 public protocol APIManagerProtocol: AnyObject {
     func requestObject<T: Decodable>(with config: RequestConfig, completion: @escaping (Result<T, Error>) -> Void)
     func request(with config: RequestConfig, completion: @escaping (Result<Bool, Error>) -> Void)
+
+  	@discardableResult
+  	func receive(on queue: DispatchQueue) -> Self
 }
 
 public struct RequestConfig {
@@ -85,8 +88,4 @@ public enum APIEncoding: String {
             return JSONEncoding.default
         }
     }
-}
-
-protocol APIRoute {
-    var config: RequestConfig { get }
 }

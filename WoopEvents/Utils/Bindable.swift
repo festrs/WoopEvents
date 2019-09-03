@@ -55,7 +55,7 @@ extension Bindable {
             handler(object, value)
         } else {
             queue.async {
-                handler(object, value)
+              	handler(object, value)
             }
         }
     }

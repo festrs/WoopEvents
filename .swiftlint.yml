@@ -21,6 +21,7 @@ opt_in_rules:
   - vertical_whitespace_between_cases
 excluded:
   - Carthage
+  - WoopEventsTests/MockUrlProtocol.swift
 force_cast: warning
 force_try:
   severity: warning

@@ -48,6 +48,12 @@ final class HomeTableViewController: UITableViewController {
         viewModel.fetchEvents()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        refreshControl?.endRefreshing()
+    }
+
     // MARK: - Functions
     private func configBind() {
         viewModel.updateHandler = tableView.reloadData

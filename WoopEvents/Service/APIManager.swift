@@ -19,16 +19,16 @@ extension APIManagerErrors: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .dataObjectNil:
-            return String.localized(by: "ErrorDataObjectNil")
+            return localized(by: "ErrorDataObjectNil")
 
         case .noInternetError:
-            return String.localized(by: "ErrorNoInternetError")
+            return localized(by: "ErrorNoInternetError")
 
         case .alamoFireError(let errorMsg):
-            return "\(String.localized(by: "ErrorDefault")) \n \(errorMsg)"
+            return "\(localized(by: "ErrorDefault")) \n \(errorMsg)"
 
         case .unknown:
-            return String.localized(by: "ErrorDefault")
+            return localized(by: "ErrorDefault")
         }
     }
 }
@@ -37,22 +37,25 @@ public class APIManager {
     private let baseUrl: String
     private let alamofireManager: Session
     private let decoder = JSONDecoder()
-    private let queue: DispatchQueue
+    private var queue: DispatchQueue
 
     // MARK: - Initialization
-    public init(_ baseUrl: String = Environment.baseUrl,
-                timeoutInterval: TimeInterval = 60,
-                queue: DispatchQueue = DispatchQueue.global(qos: .userInteractive)) {
+    public init(queue: DispatchQueue = DispatchQueue.global(qos: .userInteractive),
+                session: Session = Session.default) {
 
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = timeoutInterval
-        self.alamofireManager = Alamofire.Session(configuration: configuration)
-        self.baseUrl = baseUrl
+        self.alamofireManager = session
+        self.baseUrl = Environment.baseUrl
         self.queue = queue
     }
 }
 
 extension APIManager: APIManagerProtocol {
+  	@discardableResult
+  	public func receive(on queue: DispatchQueue) -> Self {
+    		self.queue = queue
+    		return self
+  	}
+
     private func handleError(_ error: Error) -> APIManagerErrors {
         // Can be logged to an error handler service
         if let error = error as? URLError, error.code == .notConnectedToInternet {

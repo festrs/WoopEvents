@@ -57,12 +57,12 @@ protocol EventDetailPresentation: AnyObject {
 }
 
 class EventDetailViewModel {
-    var checkinSucessMsg = String.localized(by: "HomeDetailCheckInSuccessTitle")
-    var checkinSucessTitle = String.localized(by: "HomeDetailCheckInSuccessTitle")
-    var checkinErrorTitle = String.localized(by: "HomeDetailErrorTitle")
-    var checkInButtonTitle = String.localized(by: "HomeDetailCheckinButtonTitle")
-    var sharedButtonTitle = String.localized(by: "HomeDetailShareButtonTitle")
-    var detailsTitle = String.localized(by: "HomeDetailDetailsTitle")
+    var checkinSucessMsg = localized(by: "HomeDetailCheckInSuccessTitle")
+    var checkinSucessTitle = localized(by: "HomeDetailCheckInSuccessTitle")
+    var checkinErrorTitle = localized(by: "HomeDetailErrorTitle")
+    var checkInButtonTitle = localized(by: "HomeDetailCheckinButtonTitle")
+    var sharedButtonTitle = localized(by: "HomeDetailShareButtonTitle")
+    var detailsTitle = localized(by: "HomeDetailDetailsTitle")
 
     var eventDay: String
     var eventTitle: String

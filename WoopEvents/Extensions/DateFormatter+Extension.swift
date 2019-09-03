@@ -9,23 +9,23 @@
 import Foundation
 
 public extension DateFormatter {
-    static let dayDateFormat: DateFormatter = {
+ 	 static var dayDateFormat: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"
         return formatter
-    }()
+    }
 
-    static let shortMonthBrazilianDateFormat: DateFormatter = {
+  	static var shortMonthBrazilianDateFormat: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM"
         formatter.locale = Locale(identifier: "pt_BR")
         return formatter
-    }()
+    }
 
-    static let fullDateEventDateFormat: DateFormatter = {
+  	static var fullDateEventDateFormat: DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         return dateFormatter
-    }()
+    }
 }

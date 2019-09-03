@@ -28,8 +28,8 @@ protocol HomeViewModelProtocol: ServiceModelControllerProtocol {
 class HomeViewModel {
     var updateHandler: () -> Void = {}
     var requestModel: Bindable<RequestViewModel>  = Bindable(.loading(isLoading: false))
-    var title: String = String.localized(by: "HomeTitle")
-    var emptyMsg: String = String.localized(by: "HomeEmptyMsg")
+    var title: String = localized(by: "HomeTitle")
+    var emptyMsg: String = localized(by: "HomeEmptyMsg")
     var errorIsHidden: Bindable<Bool> = Bindable(true)
     private weak var navigationDelegate: HomeNavigationProtocol?
     private var service: HomeServiceProtocol
@@ -50,20 +50,22 @@ extension HomeViewModel: HomeViewModelProtocol {
         }.compactMap { (_, object) in
             return object.event.image
         }
+
         return Array(eventsUrls)
     }
 
     func fetchEvents() {
-    	requestModel.update(with: .loading(isLoading: true))
+        requestModel.update(with: .loading(isLoading: true))
         service.request(path: .fetchEvents) { result in
             self.requestModel.update(with: .loading(isLoading: false))
 
             switch result {
             case .success(let objects):
                 self.errorIsHidden.update(with: true)
-                self.events = objects.lazy.map { HomeCellViewModel(event: $0) }.sorted(by: \.event.date)
+                self.events = objects.map { HomeCellViewModel(event: $0) }.sorted(by: \.event.date)
+
                 if Thread.isMainThread {
-					self.updateHandler()
+                    self.updateHandler()
                 } else {
                     DispatchQueue.main.async {
                         self.updateHandler()
