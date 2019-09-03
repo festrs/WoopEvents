@@ -19,8 +19,9 @@ struct FailableDecodable<Base: Decodable>: Decodable {
 
 typealias Events = [Event]
 
-struct Event: Decodable {
-    let id, title: String
+struct Event: Identifiable, Codable {
+    let id: Identifier<Event>
+    let title: String
     var price: Double
     var latitude, longitude: Double
     var image: URL
@@ -36,8 +37,9 @@ struct Event: Decodable {
     }
 
     // MARK: - Cupon
-    struct Cupon: Decodable {
-        let id, eventID: String
+    struct Cupon: Identifiable, Codable {
+        let id: Identifier<Event.Cupon>
+      	let eventID: Identifier<Event>
         var discount: Int
 
         //swiftlint:disable nesting
@@ -49,8 +51,9 @@ struct Event: Decodable {
     }
 
     // MARK: - Person
-    struct Person: Decodable {
-        let id, eventID: String
+    struct Person: Identifiable, Codable {
+      	let id: Identifier<Event.Person>
+      	let eventID: Identifier<Event>
         var name: String
         var picture: String
 

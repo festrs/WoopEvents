@@ -9,11 +9,40 @@
 import Foundation
 import CoreLocation
 
+typealias EventDetailViewModelProtocol = CheckInPresentation & EventDetailPresentation & ServiceModelControllerProtocol
+
+struct CheckInResult {
+    var checkInResult: Bool
+    var title: String?
+    var msg: String?
+
+    static func status(success: Bool,
+                       title: String? = nil,
+                       msg: String? = nil) -> CheckInResult {
+        return CheckInResult(checkInResult: success,
+                             title: title,
+                             msg: msg)
+    }
+
+    static func initialState() -> CheckInResult {
+		return CheckInResult(checkInResult: false, title: nil, msg: nil)
+    }
+}
+
 protocol EventDetailNavigationProtocol: AnyObject {
     func didTapShare(_ objectsToShare: [Any])
 }
 
-protocol EventDetailViewModelProtocol: RequestViewModelProtocol {
+protocol CheckInPresentation: AnyObject {
+    var checkinSucessMsg: String { get }
+    var checkinSucessTitle: String { get }
+    var checkinErrorTitle: String { get }
+    var checkInButtonTitle: String { get }
+    var sharedButtonTitle: String { get }
+    var detailsTitle: String { get }
+}
+
+protocol EventDetailPresentation: AnyObject {
     var eventTitle: String { get }
     var eventDay: String { get }
     var eventMonth: String { get }
@@ -21,33 +50,40 @@ protocol EventDetailViewModelProtocol: RequestViewModelProtocol {
     var eventDescription: String { get }
     var eventFullDate: String { get }
     var eventImageUrl: URL { get }
-    var checkInResult: Dynamic<Bool> { get }
+    var checkInResult: Bindable<CheckInResult> { get }
 
     func checkIn()
     func shareObjects(_ objectsToShare: [Any])
 }
 
 class EventDetailViewModel {
-    let eventDay: String
-    let eventTitle: String
-    let eventMonth: String
-    let eventFullDate: String
-    let eventDescription: String
-    let eventLocation: CLLocationCoordinate2D
-    let eventImageUrl: URL
-    let loading: Dynamic<Bool> = Dynamic(false)
-    let error: Dynamic<String?> = Dynamic(nil)
-    let checkInResult: Dynamic<Bool> = Dynamic(false)
-    private let event: Event
+    var checkinSucessMsg = localized(by: "HomeDetailCheckInSuccessTitle")
+    var checkinSucessTitle = localized(by: "HomeDetailCheckInSuccessTitle")
+    var checkinErrorTitle = localized(by: "HomeDetailErrorTitle")
+    var checkInButtonTitle = localized(by: "HomeDetailCheckinButtonTitle")
+    var sharedButtonTitle = localized(by: "HomeDetailShareButtonTitle")
+    var detailsTitle = localized(by: "HomeDetailDetailsTitle")
+
+    var eventDay: String
+    var eventTitle: String
+    var eventMonth: String
+    var eventFullDate: String
+    var eventDescription: String
+    var eventLocation: CLLocationCoordinate2D
+    var eventImageUrl: URL
+    var checkInResult: Bindable<CheckInResult> = Bindable(.initialState())
+    var requestModel: Bindable<RequestViewModel> = Bindable(.loading(isLoading: false))
+
     private var service: EventDetailServiceProtocol
     private weak var navigationDelegate: EventDetailNavigationProtocol?
+    private let event: Event
 
-    init(service: EventDetailServiceProtocol = EventDetailService(),
-         navigationDelegate: EventDetailNavigationProtocol? = nil,
-         event: Event) {
+    init(event: Event,
+         service: EventDetailServiceProtocol = EventDetailService(),
+         navigationDelegate: EventDetailNavigationProtocol? = nil) {
+        self.event = event
         self.service = service
         self.navigationDelegate = navigationDelegate
-        self.event = event
         eventTitle = event.title
         eventDescription = event.eventDescription
         eventImageUrl = event.image
@@ -59,26 +95,31 @@ class EventDetailViewModel {
 }
 
 extension EventDetailViewModel: EventDetailViewModelProtocol {
-    func shareObjects(_ objectsToShare: [Any]) {
-        navigationDelegate?.didTapShare(objectsToShare)
-    }
-
     func checkIn() {
         let userEmail = "felipe@gmail.com"
         let userName = "felipe"
-        let query = EventCheckInRequestObject(eventId: event.id, name: userName, email: userEmail)
+        let parameters = EventCheckInRequestObject(eventId: event.id, name: userName, email: userEmail)
+    
+        requestModel.update(with: .loading(isLoading: true))
 
-        loading.value = true
-        service.request(path: .checkIn(query)) { result in
-            self.loading.value = false
+        service.request(path: .checkIn(with: parameters)) { result in
+
+            self.requestModel.update(with: .loading(isLoading: false))
 
             switch result {
             case .success:
-                self.checkInResult.value = true
+                self.checkInResult.update(with: .status(success: true,
+                                                        title: self.checkinSucessTitle,
+                                                        msg: self.checkinSucessMsg))
 
             case .failure(let error):
-                self.error.value = error.localizedDescription
+                self.requestModel.update(with: .error(title: self.checkinErrorTitle,
+                                                      message: error.localizedDescription))
             }
         }
+    }
+
+    func shareObjects(_ objectsToShare: [Any]) {
+        navigationDelegate?.didTapShare(objectsToShare)
     }
 }

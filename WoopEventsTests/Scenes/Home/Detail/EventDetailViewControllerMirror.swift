@@ -15,24 +15,6 @@ final class EventDetailViewControllerMirror: MirrorObject {
         super.init(reflecting: viewController)
     }
     
-    var eventTitleLabel: UILabel? {
-        return extract()
-    }
-    var eventDayLabel: UILabel? {
-        return extract()
-    }
-    var eventTimeLabel: UILabel? {
-        return extract()
-    }
-    var eventDescriptionLabel: UILabel? {
-        return extract()
-    }
-    var eventMonthLabel: UILabel? {
-        return extract()
-    }
-    var mapView: MKMapView? {
-        return extract()
-    }
     var checkinButton: UIButton? {
         return extract()
     }

@@ -9,25 +9,25 @@
 import Foundation
 
 protocol HomeCellViewModelProtocol: AnyObject {
-    var imageUrl: URL? { get }
+    var imageUrl: URL { get }
     var title: String { get }
     var day: String { get }
     var month: String { get }
     var description: String { get }
     var event: Event { get }
-    var imageDownloadCancellation: Dynamic<Bool> { get }
+    var imageDownloadCancellation: Bindable<Bool> { get }
 
     func cancelImageDownload()
 }
 
 class HomeCellViewModel {
     let event: Event
-    let imageUrl: URL?
+    let imageUrl: URL
     let day: String
     let month: String
     let title: String
     let description: String
-    var imageDownloadCancellation: Dynamic<Bool> = Dynamic(false)
+    var imageDownloadCancellation: Bindable<Bool> = Bindable(false)
 
     init(event: Event) {
         self.event = event
@@ -41,6 +41,6 @@ class HomeCellViewModel {
 
 extension HomeCellViewModel: HomeCellViewModelProtocol {
     func cancelImageDownload() {
-        imageDownloadCancellation.value = true
+        imageDownloadCancellation.update(with: true)
     }
 }

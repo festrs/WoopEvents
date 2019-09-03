@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct Environment {
+struct Environment {
     private static let environmentFile = Bundle.main.path(forResource: "Environment", ofType: "plist")
 
-    public static var baseUrl: String = {
+    static var baseUrl: String = {
         guard let environmentFile = environmentFile,
             let environmentDictionary = NSDictionary(contentsOfFile: environmentFile),
             let url = environmentDictionary["BASE_URL"] as? String

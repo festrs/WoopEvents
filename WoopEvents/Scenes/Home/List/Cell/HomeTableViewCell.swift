@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 final class HomeTableViewCell: UITableViewCell {
-    static let identifier = "HomeTableViewCell"
+    static var identifier: String { return String.init(describing: self) }
 
     @IBOutlet private weak var eventImageView: UIImageView! {
         didSet {
@@ -37,9 +37,9 @@ final class HomeTableViewCell: UITableViewCell {
     }
 
     func config(viewModel: HomeCellViewModelProtocol) {
-        viewModel.imageDownloadCancellation.bind { [weak self] cancel in
-            guard let self = self, cancel else { return }
-            self.eventImageView.kf.cancelDownloadTask()
+        viewModel.imageDownloadCancellation.addObservation(for: eventImageView) { (eventImageView, cancel) in
+						guard cancel else { return }
+            eventImageView.kf.cancelDownloadTask()
         }
 
         eventImageView.kf.setImage(with: viewModel.imageUrl)
