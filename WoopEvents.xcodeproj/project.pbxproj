@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */; };
+		3A420D8E231EEFE40066CFBE /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
+		3A420D8F231EEFFE0066CFBE /* EventsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */; };
 		3A4E8CCA22EF12FE002B0FA7 /* StubbableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC922EF12FE002B0FA7 /* StubbableProtocols.swift */; };
+		3A4EA9E92321A219000C4EBA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EA9E423217702000C4EBA /* Nimble.framework */; };
+		3A4EA9EA2321A219000C4EBA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EA9E523217702000C4EBA /* Quick.framework */; };
+		3A4EA9EB2321A28F000C4EBA /* EventDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */; };
+		3A4EA9EC2321A291000C4EBA /* EventDetailViewControllerMirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CCB22EF1B63002B0FA7 /* EventDetailViewControllerMirror.swift */; };
 		3A53DE53230C13A20002DD68 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A53DE52230C13A20002DD68 /* Kingfisher.framework */; };
 		3A53DE87230C2C700002DD68 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5EE100229F03F000CAFA52 /* Environment.plist */; };
 		3A56632E231967AF0098390D /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56632D231967AF0098390D /* Cache.swift */; };
@@ -85,6 +92,8 @@
 		3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsStub.swift; sourceTree = "<group>"; };
 		3A4E8CC922EF12FE002B0FA7 /* StubbableProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubbableProtocols.swift; sourceTree = "<group>"; };
 		3A4E8CCB22EF1B63002B0FA7 /* EventDetailViewControllerMirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewControllerMirror.swift; sourceTree = "<group>"; };
+		3A4EA9E423217702000C4EBA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		3A4EA9E523217702000C4EBA /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		3A53DE4E230C13510002DD68 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3A53DE4F230C13520002DD68 /* APIManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerProtocols.swift; sourceTree = "<group>"; };
 		3A53DE52230C13A20002DD68 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
@@ -154,6 +163,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4EA9E92321A219000C4EBA /* Nimble.framework in Frameworks */,
+				3A4EA9EA2321A219000C4EBA /* Quick.framework in Frameworks */,
 				3AF239D5230DBF7E0008F876 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +232,8 @@
 		3A5EE0FC229EFEE200CAFA52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A4EA9E423217702000C4EBA /* Nimble.framework */,
+				3A4EA9E523217702000C4EBA /* Quick.framework */,
 				3A53DE54230C13B10002DD68 /* Alamofire.framework */,
 				3A53DE52230C13A20002DD68 /* Kingfisher.framework */,
 			);
@@ -442,6 +455,7 @@
 				3A5EE0E3229EF7EE00CAFA52 /* Sources */,
 				3A5EE0E4229EF7EE00CAFA52 /* Frameworks */,
 				3A5EE0E5229EF7EE00CAFA52 /* Resources */,
+				3A4EA9E82321A14A000C4EBA /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -519,6 +533,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A4EA9E82321A14A000C4EBA /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Quick.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		3A53DE81230C19420002DD68 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -637,10 +671,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A420D8E231EEFE40066CFBE /* EventDetailViewModelTests.swift in Sources */,
+				3A4EA9EC2321A291000C4EBA /* EventDetailViewControllerMirror.swift in Sources */,
 				3AA657CF22EB8E5700A55A82 /* MirrorObject.swift in Sources */,
+				3A4EA9EB2321A28F000C4EBA /* EventDetailViewControllerTests.swift in Sources */,
+				3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */,
 				3A5EE16F229FE73700CAFA52 /* DateFormatterTests.swift in Sources */,
 				3A4E8CCA22EF12FE002B0FA7 /* StubbableProtocols.swift in Sources */,
 				3A5EE19722A1296D00CAFA52 /* UIViewControllerTests.swift in Sources */,
+				3A420D8F231EEFFE0066CFBE /* EventsStub.swift in Sources */,
 				3A5EE19122A1268400CAFA52 /* EncodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

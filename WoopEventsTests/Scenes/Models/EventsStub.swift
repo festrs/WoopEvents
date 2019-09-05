@@ -14,7 +14,7 @@ extension Event: Stubbable {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
 
-        let event = Event(id: id,
+        let event = Event(id: "123",
                           title: "Encontro regional ONGS",
                           price: 10.0,
                           latitude: 11.0,

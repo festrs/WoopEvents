@@ -12,20 +12,20 @@ import CoreLocation
 typealias EventDetailViewModelProtocol = CheckInPresentation & EventDetailPresentation & ServiceModelControllerProtocol
 
 struct CheckInResult {
-    var checkInResult: Bool
+    var status: Bool
     var title: String?
     var msg: String?
 
     static func status(success: Bool,
                        title: String? = nil,
                        msg: String? = nil) -> CheckInResult {
-        return CheckInResult(checkInResult: success,
+        return CheckInResult(status: success,
                              title: title,
                              msg: msg)
     }
 
     static func initialState() -> CheckInResult {
-		return CheckInResult(checkInResult: false, title: nil, msg: nil)
+    	return CheckInResult(status: false, title: nil, msg: nil)
     }
 }
 
@@ -40,6 +40,9 @@ protocol CheckInPresentation: AnyObject {
     var checkInButtonTitle: String { get }
     var sharedButtonTitle: String { get }
     var detailsTitle: String { get }
+  	var checkInResult: Bindable<CheckInResult> { get }
+
+  	func checkIn()
 }
 
 protocol EventDetailPresentation: AnyObject {
@@ -50,9 +53,7 @@ protocol EventDetailPresentation: AnyObject {
     var eventDescription: String { get }
     var eventFullDate: String { get }
     var eventImageUrl: URL { get }
-    var checkInResult: Bindable<CheckInResult> { get }
 
-    func checkIn()
     func shareObjects(_ objectsToShare: [Any])
 }
 

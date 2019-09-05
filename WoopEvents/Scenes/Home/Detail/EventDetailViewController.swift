@@ -65,7 +65,7 @@ final class EventDetailViewController: UIViewController {
         configMap()
 
         viewModel.checkInResult.addObservation(for: self) { (viewController, checkInResult) in
-            guard checkInResult.checkInResult else { return }
+            guard checkInResult.status else { return }
 
             viewController.presentAlert(with: checkInResult.title ?? "", and: checkInResult.msg ?? "")
         }
