@@ -11,7 +11,7 @@ import Foundation
 //https://www.swiftbysundell.com/posts/bindable-values-in-swift
 class Bindable<Value> {
     private var observations = [(Value) -> Bool]()
-    private var lastValue: Value?
+    private(set) var lastValue: Value?
     private var queue: DispatchQueue = DispatchQueue.main
 
     init(_ value: Value? = nil) {

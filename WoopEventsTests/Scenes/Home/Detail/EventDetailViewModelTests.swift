@@ -25,62 +25,42 @@ final class EventDetailViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.eventLocation.latitude, location.latitude)
         //swiftlint:disable force_unwrapping
         XCTAssertEqual(viewModel.eventImageUrl, URL(string: "www.google.com")!)
-        XCTAssertNil(viewModel.error.value)
-        XCTAssertFalse(viewModel.loading.value)
-        XCTAssertFalse(viewModel.checkInResult.value)
     }
 
     func testCheckinSuccess() {
-        // Given
         let successService = EventDetailtServiceSuccessStub()
         let event = Event.stub(withID: "123")
-        let viewModel = EventDetailViewModel(service: successService, event: event)
-        let observer = DynamicObserver<Bool>()
-        viewModel.loading.setObserver(with: observer)
+      	let viewModel = EventDetailViewModel(event: event, service: successService)
 
-        // When
         viewModel.checkIn()
 
-        // Then
         XCTAssertTrue(successService.checkInCalled)
-        XCTAssertEqual(observer.values, [true, false])
-        XCTAssertTrue(viewModel.checkInResult.value)
-        XCTAssertNil(viewModel.error.value)
+      	XCTAssertTrue(viewModel.checkInResult.lastValue?.status ?? false)
     }
 
     func testCheckinFailure() {
-        // Given
         let errorService = EventDetailtServiceErrorStub()
         let event = Event.stub(withID: "123")
-        let viewModel = EventDetailViewModel(service: errorService, event: event)
-        let observer = DynamicObserver<Bool>()
-        viewModel.loading.setObserver(with: observer)
+      	let viewModel = EventDetailViewModel(event: event, service: errorService)
 
-        // When
         viewModel.checkIn()
 
-        // Then
         XCTAssertTrue(errorService.checkInCalled)
-        XCTAssertEqual(observer.values, [true, false])
-        XCTAssertFalse(viewModel.checkInResult.value)
-        XCTAssertNotNil(viewModel.error.value)
+        XCTAssertFalse(viewModel.checkInResult.lastValue?.status ?? true)
     }
 
-    func testTapSharedShouldCallNavigation() {
-        // Given
+    func testSharedShouldCallNavigation() {
         let event = Event.stub(withID: "123")
         let navigation = EventNavigationSpy()
-        let viewModel = EventDetailViewModel(navigationDelegate: navigation, event: event)
+      	let viewModel = EventDetailViewModel(event: event, navigationDelegate: navigation)
 
-        // When
         viewModel.shareObjects([])
 
-        // Then
         XCTAssertTrue(navigation.didTapShareCalled)
     }
 }
 
-class EventNavigationSpy: EventDetailNavigationProtocol {
+final class EventNavigationSpy: EventDetailNavigationProtocol {
     var didTapShareCalled = false
 
     func didTapShare(_ objectsToShare: [Any]) {
