@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A040280233E4695000D879A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A04027F233E4695000D879A /* Colors.xcassets */; };
+		3A288EE72345164C00AD1875 /* FelipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A288EE52345164C00AD1875 /* FelipeViewController.swift */; };
+		3A288EE82345164C00AD1875 /* FelipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A288EE62345164C00AD1875 /* FelipeViewController.xib */; };
 		3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */; };
 		3A420D8E231EEFE40066CFBE /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
 		3A420D8F231EEFFE0066CFBE /* EventsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */; };
@@ -86,6 +89,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A04027F233E4695000D879A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		3A288EE52345164C00AD1875 /* FelipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FelipeViewController.swift; sourceTree = "<group>"; };
+		3A288EE62345164C00AD1875 /* FelipeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FelipeViewController.xib; sourceTree = "<group>"; };
 		3A3E6C0F22EF34700010CCD2 /* HomeServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceStub.swift; sourceTree = "<group>"; };
 		3A3E6C1622EF69540010CCD2 /* HomeTableViewCellMirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCellMirror.swift; sourceTree = "<group>"; };
 		3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailServiceStub.swift; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 				3A5EE0DD229EF7EE00CAFA52 /* Assets.xcassets */,
 				3A5EE0E2229EF7EE00CAFA52 /* Info.plist */,
 				3A5EE10E229F0D1700CAFA52 /* Localizable.strings */,
+				3A04027F233E4695000D879A /* Colors.xcassets */,
 			);
 			path = WoopEvents;
 			sourceTree = "<group>";
@@ -287,6 +294,8 @@
 			isa = PBXGroup;
 			children = (
 				3A5EE143229F15EE00CAFA52 /* Home */,
+				3A288EE52345164C00AD1875 /* FelipeViewController.swift */,
+				3A288EE62345164C00AD1875 /* FelipeViewController.xib */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -511,7 +520,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AF23980230DB1B10008F876 /* .swiftlint.yml in Resources */,
+				3A288EE82345164C00AD1875 /* FelipeViewController.xib in Resources */,
 				3A5EE10F229F0D1700CAFA52 /* Localizable.strings in Resources */,
+				3A040280233E4695000D879A /* Colors.xcassets in Resources */,
 				3A5EE18622A09AA000CAFA52 /* EventDetailViewController.xib in Resources */,
 				3AF2397E230DB1B10008F876 /* Cartfile in Resources */,
 				3AF2397F230DB1B10008F876 /* .travis.yml in Resources */,
@@ -660,6 +671,7 @@
 				3A5EE14B229F15FB00CAFA52 /* Event.swift in Sources */,
 				3A5EE160229F1A3300CAFA52 /* HomeCellViewModel.swift in Sources */,
 				3AF239CF230DBC5A0008F876 /* Localized.swift in Sources */,
+				3A288EE72345164C00AD1875 /* FelipeViewController.swift in Sources */,
 				3A5EE16C229FE70500CAFA52 /* DateFormatter+Extension.swift in Sources */,
 				3A5EE0D7229EF7ED00CAFA52 /* AppDelegate.swift in Sources */,
 				3A9CDA7A22FC5BA900232D24 /* Sequence+Extension.swift in Sources */,
