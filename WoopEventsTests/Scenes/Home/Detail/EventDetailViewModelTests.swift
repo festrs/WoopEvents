@@ -18,7 +18,7 @@ final class EventDetailViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.eventDay, "23")
         XCTAssertEqual(viewModel.eventTitle, "Encontro regional ONGS")
         XCTAssertEqual(viewModel.eventMonth, "set")
-        XCTAssertEqual(viewModel.eventFullDate, "23 de setembro de 1990 06:00")
+        XCTAssertEqual(viewModel.eventFullDate, "September 23, 1990 at 6:00 AM")
         XCTAssertEqual(viewModel.eventDescription, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
         let location = CLLocationCoordinate2D(latitude: 11.0, longitude: 10.0)
         XCTAssertEqual(viewModel.eventLocation.longitude, location.longitude)

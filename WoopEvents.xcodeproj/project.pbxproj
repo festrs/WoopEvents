@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A00A81823509AC1002A97FC /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3A00A81723509AC0002A97FC /* .travis.yml */; };
 		3A040280233E4695000D879A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A04027F233E4695000D879A /* Colors.xcassets */; };
 		3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */; };
 		3A420D8E231EEFE40066CFBE /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
@@ -87,6 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A00A81723509AC0002A97FC /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		3A04027F233E4695000D879A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3A3E6C0F22EF34700010CCD2 /* HomeServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceStub.swift; sourceTree = "<group>"; };
 		3A3E6C1622EF69540010CCD2 /* HomeTableViewCellMirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCellMirror.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				3A5EE122229F121300CAFA52 /* AppCoordinator.swift */,
 				3A5EE0DD229EF7EE00CAFA52 /* Assets.xcassets */,
 				3A5EE0E2229EF7EE00CAFA52 /* Info.plist */,
+				3A00A81723509AC0002A97FC /* .travis.yml */,
 				3A5EE10E229F0D1700CAFA52 /* Localizable.strings */,
 				3A04027F233E4695000D879A /* Colors.xcassets */,
 			);
@@ -519,6 +522,7 @@
 				3A5EE18622A09AA000CAFA52 /* EventDetailViewController.xib in Resources */,
 				3AF2397E230DB1B10008F876 /* Cartfile in Resources */,
 				3AF2397F230DB1B10008F876 /* .travis.yml in Resources */,
+				3A00A81823509AC1002A97FC /* .travis.yml in Resources */,
 				3A5EE15E229F1A1D00CAFA52 /* HomeTableViewCell.xib in Resources */,
 				3AF2397D230DB1B10008F876 /* README.md in Resources */,
 				3A5EE17522A0844D00CAFA52 /* HomeTableViewController.xib in Resources */,

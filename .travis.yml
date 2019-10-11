@@ -1,9 +1,9 @@
 language: objective-c
-osx_image: xcode10.2
+osx_image: xcode10.3
 xcode_project: WoopEvents.xcodeproj
 xcode_scheme: WoopEvents
 xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone X
 before_install:
 - brew install carthage && brew install swiftlint
-- carthage update --platform ios --cache-builds
+- carthage update --new-resolver --platform ios --cache-builds
 - swiftlint
