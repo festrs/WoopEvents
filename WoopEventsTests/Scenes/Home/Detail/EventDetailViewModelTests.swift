@@ -46,7 +46,7 @@ final class EventDetailViewModelTests: XCTestCase {
         viewModel.checkIn()
 
         XCTAssertTrue(errorService.checkInCalled)
-        XCTAssertFalse(viewModel.checkInResult.lastValue?.status ?? true)
+        XCTAssertNil(viewModel.checkInResult.lastValue)
     }
 
     func testSharedShouldCallNavigation() {

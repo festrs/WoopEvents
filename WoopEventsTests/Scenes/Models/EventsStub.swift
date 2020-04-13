@@ -9,6 +9,12 @@
 import Foundation
 @testable import WoopEvents
 
+extension EventCheckInResponseObject: Stubbable {
+    static func stub(withID id: String) -> EventCheckInResponseObject {
+        return EventCheckInResponseObject(code: id)
+    }
+}
+
 extension Event: Stubbable {
     static func stub(withID id: String) -> Event {
         let dateFormatter = DateFormatter()

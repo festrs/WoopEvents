@@ -54,6 +54,8 @@ final class EventDetailViewControllerTests: QuickSpec {
 }
 
 final class EventDetailViewModelStub: EventDetailViewModelProtocol {
+    var error: Bindable<Error?> = Bindable()
+    var isLoading: Bindable<Bool> = Bindable()
     var checkinSucessMsg: String = ""
     var checkinSucessTitle: String = ""
     var checkinErrorTitle: String = ""
@@ -68,8 +70,7 @@ final class EventDetailViewModelStub: EventDetailViewModelProtocol {
     var eventFullDate: String = "23 de setembro de 1990 06:00"
     //swiftlint:disable force_unwrapping
     var eventImageUrl: URL = URL(string: "www.google.com")!
-    var checkInResult: Bindable<CheckInResult> = .init(CheckInResult.status(success: true))
-    var requestModel: Bindable<RequestViewModel> = .init(RequestViewModel.loading(isLoading: true))
+    var checkInResult: Bindable<CheckInResult> = Bindable()
 
     var checkinCalled = false
     var objectsToShareCalled: [Any] = []

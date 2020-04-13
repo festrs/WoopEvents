@@ -8,6 +8,8 @@
 
 import Foundation
 
+// https://www.swiftbysundell.com/articles/type-safe-identifiers-in-swift/
+
 protocol Identifiable {
     associatedtype RawIdentifier: Codable = String
 

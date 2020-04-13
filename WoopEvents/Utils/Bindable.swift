@@ -24,6 +24,10 @@ extension Bindable {
         lastValue = value
         observations = observations.filter { $0(value) }
     }
+
+    func clearObservations() {
+      observations.removeAll()
+    }
     
     func addObservation<O: AnyObject>(
         for object: O,

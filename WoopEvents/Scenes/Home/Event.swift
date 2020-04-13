@@ -8,15 +8,6 @@
 
 import Foundation
 
-struct FailableDecodable<Base: Decodable>: Decodable {
-    let base: Base?
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.base = try? container.decode(Base.self)
-    }
-}
-
 typealias Events = [Event]
 
 struct Event: Identifiable, Codable {

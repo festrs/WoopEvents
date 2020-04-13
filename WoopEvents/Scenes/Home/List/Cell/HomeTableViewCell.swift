@@ -21,7 +21,7 @@ final class HomeTableViewCell: UITableViewCell {
     @IBOutlet private weak var eventDayLabel: UILabel!
     @IBOutlet private weak var eventMonthLabel: UILabel!
     @IBOutlet private weak var eventDescriptionLabel: UILabel!
-    var viewModel: HomeCellViewModelProtocol!
+    var viewModel: HomeCellViewModel?
 
     // MARK: Life Cycle
     override func awakeFromNib() {
@@ -30,13 +30,19 @@ final class HomeTableViewCell: UITableViewCell {
         config()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        viewModel?.imageDownloadCancellation.clearObservations()
+    }
+
     // MARK: Functions
     private func config() {
         eventImageView.layer.cornerRadius = 4.0
         eventImageView.clipsToBounds = true
     }
 
-    func config(viewModel: HomeCellViewModelProtocol) {
+    func config(viewModel: HomeCellViewModel) {
         viewModel.imageDownloadCancellation.addObservation(for: eventImageView) { (eventImageView, cancel) in
 						guard cancel else { return }
             eventImageView.kf.cancelDownloadTask()

@@ -9,23 +9,17 @@
 import Foundation
 import CoreLocation
 
-typealias EventDetailViewModelProtocol = CheckInPresentation & EventDetailPresentation & ServiceModelControllerProtocol
+typealias EventDetailViewModelProtocol = CheckInPresentation & EventDetailPresentation
 
 struct CheckInResult {
     var status: Bool
-    var title: String?
-    var msg: String?
+    var title: String
+    var msg: String
 
-    static func status(success: Bool,
-                       title: String? = nil,
-                       msg: String? = nil) -> CheckInResult {
-        return CheckInResult(status: success,
-                             title: title,
-                             msg: msg)
-    }
-
-    static func initialState() -> CheckInResult {
-    	return CheckInResult(status: false, title: nil, msg: nil)
+    static func success() -> CheckInResult {
+        return CheckInResult(status: true,
+                             title: localized(by: "HomeDetailCheckInSuccessTitle"),
+                             msg: localized(by: "HomeDetailCheckInSuccessMsg"))
     }
 }
 
@@ -41,6 +35,8 @@ protocol CheckInPresentation: AnyObject {
     var sharedButtonTitle: String { get }
     var detailsTitle: String { get }
   	var checkInResult: Bindable<CheckInResult> { get }
+    var error: Bindable<Error?> { get }
+    var isLoading: Bindable<Bool> { get }
 
   	func checkIn()
 }
@@ -64,6 +60,8 @@ class EventDetailViewModel {
     var checkInButtonTitle = localized(by: "HomeDetailCheckinButtonTitle")
     var sharedButtonTitle = localized(by: "HomeDetailShareButtonTitle")
     var detailsTitle = localized(by: "HomeDetailDetailsTitle")
+    var error: Bindable<Error?> = Bindable()
+    var isLoading: Bindable<Bool> = Bindable()
 
     var eventDay: String
     var eventTitle: String
@@ -72,15 +70,14 @@ class EventDetailViewModel {
     var eventDescription: String
     var eventLocation: CLLocationCoordinate2D
     var eventImageUrl: URL
-    var checkInResult: Bindable<CheckInResult> = Bindable(.initialState())
-    var requestModel: Bindable<RequestViewModel> = Bindable(.loading(isLoading: false))
+    var checkInResult: Bindable<CheckInResult> = Bindable()
 
-    private var service: EventDetailServiceProtocol
+    private var service: DataRequestable
     private weak var navigationDelegate: EventDetailNavigationProtocol?
     private let event: Event
 
     init(event: Event,
-         service: EventDetailServiceProtocol = EventDetailService(),
+         service: DataRequestable = Service(),
          navigationDelegate: EventDetailNavigationProtocol? = nil) {
         self.event = event
         self.service = service
@@ -99,23 +96,19 @@ extension EventDetailViewModel: EventDetailViewModelProtocol {
     func checkIn() {
         let userEmail = "felipe@gmail.com"
         let userName = "felipe"
-        let parameters = EventCheckInRequestObject(eventId: event.id, name: userName, email: userEmail)
+        let credentials = EventCheckInRequestObject(eventId: event.id, name: userName, email: userEmail)
     
-        requestModel.update(with: .loading(isLoading: true))
+        isLoading.update(with: true)
 
-        service.request(path: .checkIn(with: parameters)) { result in
-
-            self.requestModel.update(with: .loading(isLoading: false))
+        service.request(.checkIn(with: credentials)) { (result: Result<EventCheckInResponseObject, Error>) in
+            self.isLoading.update(with: false)
 
             switch result {
             case .success:
-                self.checkInResult.update(with: .status(success: true,
-                                                        title: self.checkinSucessTitle,
-                                                        msg: self.checkinSucessMsg))
+                self.checkInResult.update(with: .success())
 
             case .failure(let error):
-                self.requestModel.update(with: .error(title: self.checkinErrorTitle,
-                                                      message: error.localizedDescription))
+                self.error.update(with: error)
             }
         }
     }

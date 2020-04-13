@@ -12,30 +12,34 @@ protocol HomeNavigationProtocol: AnyObject {
     func didSelectEvent(_ event: Event)
 }
 
-protocol HomeViewModelProtocol: ServiceModelControllerProtocol {
+protocol HomeViewModelProtocol: AnyObject {
     var updateHandler: () -> Void { get set }
     var title: String { get }
     var errorIsHidden: Bindable<Bool> { get }
+    var stringError: Bindable<String?> { get }
     var emptyMsg: String { get }
-
+    var loading: Bindable<Bool> { get }
+	var tableDataSource: TableViewModelDataSource<HomeCellViewModel> { get }
+    
     func getImagesUrls(at indexPaths: [IndexPath]) -> [URL]
-    func eventsCount() -> Int
     func fetchEvents()
     func didTapCell(at indexPath: IndexPath)
-    func getObject(at row: Int) -> HomeCellViewModelProtocol?
 }
 
-class HomeViewModel {
+final class HomeViewModel {
+    typealias EventsListResponse = Result<[Event], Error>
+    
     var updateHandler: () -> Void = {}
-    var requestModel: Bindable<RequestViewModel>  = Bindable(.loading(isLoading: false))
-    var title: String = localized(by: "HomeTitle")
-    var emptyMsg: String = localized(by: "HomeEmptyMsg")
-    var errorIsHidden: Bindable<Bool> = Bindable(true)
+    let title: String = localized(by: "HomeTitle")
+    let emptyMsg: String = localized(by: "HomeEmptyMsg")
+    let errorIsHidden: Bindable<Bool> = Bindable()
+    let stringError: Bindable<String?> = Bindable()
+    let loading: Bindable<Bool> = Bindable()
+    var tableDataSource: TableViewModelDataSource<HomeCellViewModel> = TableViewModelDataSource(items: [])
     private weak var navigationDelegate: HomeNavigationProtocol?
-    private var service: HomeServiceProtocol
-    private var events: [HomeCellViewModelProtocol] = []
+    private var service: DataRequestable
 
-    init(service: HomeServiceProtocol = HomeService(),
+    init(service: DataRequestable = Service(),
          navigationDelegate: HomeNavigationProtocol? = nil) {
         self.service = service
         self.navigationDelegate = navigationDelegate
@@ -44,25 +48,22 @@ class HomeViewModel {
 
 extension HomeViewModel: HomeViewModelProtocol {
     func getImagesUrls(at indexPaths: [IndexPath]) -> [URL] {
-        let validIndexPaths = indexPaths.map { $0.row }
-        let eventsUrls = events.enumerated().lazy.filter {
-            validIndexPaths.contains($0.offset)
-        }.compactMap { (_, object) in
-            return object.event.image
-        }
+        let urls = indexPaths.lazy.compactMap { self.tableDataSource.getObject(at: $0) }.map { $0.imageUrl }
 
-        return Array(eventsUrls)
+        return Array(urls)
     }
 
     func fetchEvents() {
-        requestModel.update(with: .loading(isLoading: true))
-        service.request(path: .fetchEvents) { result in
-            self.requestModel.update(with: .loading(isLoading: false))
+        loading.update(with: true)
+
+        service.request(.eventList) { (result: EventsListResponse) in
+            self.loading.update(with: false)
 
             switch result {
             case .success(let objects):
                 self.errorIsHidden.update(with: true)
-                self.events = objects.map { HomeCellViewModel(event: $0) }.sorted(by: \.event.date)
+                let events = objects.map { HomeCellViewModel(event: $0) }.sorted(by: \.event.date)
+                self.tableDataSource.update(with: [events])
 
                 if Thread.isMainThread {
                     self.updateHandler()
@@ -74,28 +75,16 @@ extension HomeViewModel: HomeViewModelProtocol {
 
             case .failure(let error):
                 self.errorIsHidden.update(with: false)
-                self.requestModel.update(with: .error(title: "",
-                                                      message: error.localizedDescription))
+                self.stringError.update(with: error.localizedDescription)
             }
         }
     }
 
-    func getObject(at row: Int) -> HomeCellViewModelProtocol? {
-        guard events.indices.contains(row) else {
-            return nil
-        }
-        return events[row]
-    }
-
     func didTapCell(at indexPath: IndexPath) {
-        guard events.indices.contains(indexPath.row) else {
+        guard let object = tableDataSource.getObject(at: indexPath) else {
             return
         }
-        let event = events[indexPath.row].event
+        let event = object.event
         navigationDelegate?.didSelectEvent(event)
-    }
-
-    func eventsCount() -> Int {
-        return events.count
     }
 }

@@ -1,0 +1,12 @@
+//
+//  Development.xcconfig
+//  WoopEvents
+//
+//  Created by Felipe Dias Pereira on 2020-04-09.
+//  Copyright © 2020 FelipeP. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = http:/$()/5b840ba5db24a100142dcd8c.mockapi.io/api/

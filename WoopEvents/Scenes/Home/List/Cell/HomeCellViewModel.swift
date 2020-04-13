@@ -6,21 +6,9 @@
 //  Copyright © 2019 FelipeP. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol HomeCellViewModelProtocol: AnyObject {
-    var imageUrl: URL { get }
-    var title: String { get }
-    var day: String { get }
-    var month: String { get }
-    var description: String { get }
-    var event: Event { get }
-    var imageDownloadCancellation: Bindable<Bool> { get }
-
-    func cancelImageDownload()
-}
-
-class HomeCellViewModel {
+final class HomeCellViewModel {
     let event: Event
     let imageUrl: URL
     let day: String
@@ -39,7 +27,16 @@ class HomeCellViewModel {
     }
 }
 
-extension HomeCellViewModel: HomeCellViewModelProtocol {
+extension HomeCellViewModel: SelfConstructedUITableViewCell {
+    func makeCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell? {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier,
+                                                       for: indexPath) as? HomeTableViewCell else {
+                                                        preconditionFailure("Failure")
+        }
+        cell.config(viewModel: self)
+        return cell
+    }
+
     func cancelImageDownload() {
         imageDownloadCancellation.update(with: true)
     }

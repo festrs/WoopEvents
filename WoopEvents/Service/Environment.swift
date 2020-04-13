@@ -8,15 +8,27 @@
 
 import Foundation
 
-struct Environment {
-    private static let environmentFile = Bundle.main.path(forResource: "Environment", ofType: "plist")
+public enum Environment {
+    // MARK: - Keys
+    enum Keys {
+        enum Plist {
+            static let baseUrl = "BASE_URL"
+        }
+    }
 
-    static var baseUrl: String = {
-        guard let environmentFile = environmentFile,
-            let environmentDictionary = NSDictionary(contentsOfFile: environmentFile),
-            let url = environmentDictionary["BASE_URL"] as? String
-            else {
-                fatalError("BASE_URL not found in Environment.plist")
+    // MARK: - Plist
+    private static let infoDictionary: [String: Any] = {
+        guard let dict = Bundle.main.infoDictionary else {
+            fatalError("Plist file not found")
+        }
+        return dict
+    }()
+
+    // MARK: - Plist values
+    static let baseUrl: URL = {
+        guard let baseUrl = Environment.infoDictionary[Keys.Plist.baseUrl] as? String,
+            let url = URL(string: baseUrl) else {
+                fatalError("API Key not set in plist for this environment")
         }
         return url
     }()
