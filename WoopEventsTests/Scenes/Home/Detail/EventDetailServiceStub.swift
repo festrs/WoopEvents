@@ -13,21 +13,27 @@ class EventDetailServiceStub {
     var checkInCalled = false
 }
 
-final class EventDetailtServiceSuccessStub: EventDetailServiceStub, EventDetailServiceProtocol {
+final class EventDetailtServiceSuccessStub: EventDetailServiceStub, DataRequestable {
+    func request<T>(_ request: Request,
+                    completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
+        let response = EventCheckInResponseObject.stub(withID:"123")
 
-    func request(path route: HomeDetailRoute, completionHandler: @escaping CheckInCompletionHandler) {
+        guard let unResponse = response as? T else {
+            preconditionFailure("T is not events")
+        }
         checkInCalled = true
-        completionHandler(.success(true))
+        completion(.success(unResponse))
     }
 }
 
-final class EventDetailtServiceErrorStub: EventDetailServiceStub, EventDetailServiceProtocol {
+final class EventDetailtServiceErrorStub: EventDetailServiceStub, DataRequestable {
+    func request<T>(_ request: Request, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
+        checkInCalled = true
+        completion(.failure(SpyError.default))
+    }
+
     enum SpyError: Error {
         case `default`
     }
 
-    func request(path route: HomeDetailRoute, completionHandler: @escaping CheckInCompletionHandler) {
-        checkInCalled = true
-        completionHandler(.failure(SpyError.default))
-    }
 }

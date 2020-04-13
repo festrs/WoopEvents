@@ -28,12 +28,12 @@ class HomeCellViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.description, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
         //swiftlint:disable force_unwrapping
         XCTAssertEqual(viewModel.imageUrl, URL(string: "www.google.com")!)
-        XCTAssertEqual(viewModel.event.id, "123")
+        XCTAssertEqual(viewModel.event.id.rawValue, "123")
     }
 
     func testCancelDownloadCalled() {
         viewModel.cancelImageDownload()
 
-        XCTAssertTrue(viewModel.imageDownloadCancellation.value)
+        XCTAssertTrue(viewModel.imageDownloadCancellation.lastValue == true)
     }
 }

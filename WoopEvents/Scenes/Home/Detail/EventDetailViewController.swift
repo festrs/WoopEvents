@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 final class EventDetailViewController: UIViewController {
-    let viewModel: EventDetailViewModelProtocol
+    private let viewModel: EventDetailViewModelProtocol
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var eventImageView: UIImageView!
     @IBOutlet private weak var eventTitleLabel: UILabel!
@@ -25,6 +25,18 @@ final class EventDetailViewController: UIViewController {
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var loaderView: UIView!
     @IBOutlet private weak var loaderActivityIndicator: UIActivityIndicatorView!
+    private var alertError: Error? {
+        didSet {
+            if let alertError = alertError {
+                showAlert(title: "Error", message: alertError.localizedDescription)
+            }
+        }
+    }
+    private var isLoading: Bool = false {
+        didSet {
+			isLoading ? showLoader() : hideLoader()
+        }
+    }
 
     // MARK: - Life Cycle
     init(viewModel: EventDetailViewModelProtocol) {
@@ -67,16 +79,11 @@ final class EventDetailViewController: UIViewController {
         viewModel.checkInResult.addObservation(for: self) { (viewController, checkInResult) in
             guard checkInResult.status else { return }
 
-            viewController.presentAlert(with: checkInResult.title ?? "", and: checkInResult.msg ?? "")
+            viewController.presentAlert(with: checkInResult.title, and: checkInResult.msg)
         }
 
-        viewModel.requestModel.addObservation(for: self) { (viewController, viewModel) in
-            viewModel.loading ? viewController.showLoader() : viewController.hideLoader()
-
-            guard let error = viewModel.error else { return }
-
-            viewController.presentAlert(with: viewModel.errorTitle ?? "", and: error)
-        }
+        viewModel.isLoading.bind(to: \.isLoading, on: self)
+        viewModel.error.bind(to: \.alertError, on: self)
     }
 
     private func configMap() {
