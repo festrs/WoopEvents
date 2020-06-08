@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import Networking
 
 typealias EventDetailViewModelProtocol = CheckInPresentation & EventDetailPresentation
 

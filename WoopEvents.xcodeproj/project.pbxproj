@@ -3,15 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3A040280233E4695000D879A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A04027F233E4695000D879A /* Colors.xcassets */; };
+		3A2F5932247EC958001F89BE /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F5931247EC958001F89BE /* SwiftUIView.swift */; };
+		3A2F5933247ECEFA001F89BE /* StubbableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC922EF12FE002B0FA7 /* StubbableProtocols.swift */; };
+		3A2F5936247ECF1B001F89BE /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F5935247ECF1B001F89BE /* EventRow.swift */; };
+		3A2F5940247ECF8B001F89BE /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F593A247ECF8B001F89BE /* ImageLoader.swift */; };
+		3A2F5941247ECF8B001F89BE /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F593B247ECF8B001F89BE /* AsyncImage.swift */; };
+		3A2F5942247ECF8B001F89BE /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F593C247ECF8B001F89BE /* ImageLoaderView.swift */; };
+		3A2F5944247ED018001F89BE /* EventsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */; };
+		3A3A50C1248E566100612F86 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 3A3A50C0248E566100612F86 /* Networking */; };
 		3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */; };
 		3A420D8E231EEFE40066CFBE /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
-		3A420D8F231EEFFE0066CFBE /* EventsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */; };
-		3A4E8CCA22EF12FE002B0FA7 /* StubbableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC922EF12FE002B0FA7 /* StubbableProtocols.swift */; };
 		3A4EA9E92321A219000C4EBA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EA9E423217702000C4EBA /* Nimble.framework */; };
 		3A4EA9EA2321A219000C4EBA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EA9E523217702000C4EBA /* Quick.framework */; };
 		3A4EA9EB2321A28F000C4EBA /* EventDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19A22A13C3B00CAFA52 /* EventDetailViewControllerTests.swift */; };
@@ -51,8 +57,6 @@
 		3AF23980230DB1B10008F876 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3AF2397C230DB1B10008F876 /* .swiftlint.yml */; };
 		3AF239CE230DBC5A0008F876 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE103229F045D00CAFA52 /* Environment.swift */; };
 		3AF239CF230DBC5A0008F876 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE111229F0D3E00CAFA52 /* Localized.swift */; };
-		3AF239D0230DBC5A0008F876 /* DataRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53DE4F230C13520002DD68 /* DataRequestable.swift */; };
-		3AF239D1230DBC5A0008F876 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53DE4E230C13510002DD68 /* Service.swift */; };
 		3AF6347D243F94C9000A48EE /* EventsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6347C243F94C9000A48EE /* EventsEndpoint.swift */; };
 		3AF6347F243F94D6000A48EE /* CheckInEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6347E243F94D6000A48EE /* CheckInEndpoint.swift */; };
 		3AF63481243FB0EA000A48EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AF63483243FB0EA000A48EE /* Localizable.strings */; };
@@ -85,6 +89,12 @@
 /* Begin PBXFileReference section */
 		3A00A81723509AC0002A97FC /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		3A04027F233E4695000D879A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		3A2F5931247EC958001F89BE /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		3A2F5935247ECF1B001F89BE /* EventRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		3A2F593A247ECF8B001F89BE /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		3A2F593B247ECF8B001F89BE /* AsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		3A2F593C247ECF8B001F89BE /* ImageLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
+		3A3A50BF248E50BC00612F86 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Networking; path = ../Networking; sourceTree = "<group>"; };
 		3A3E6C0F22EF34700010CCD2 /* HomeServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceStub.swift; sourceTree = "<group>"; };
 		3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailServiceStub.swift; sourceTree = "<group>"; };
 		3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsStub.swift; sourceTree = "<group>"; };
@@ -92,8 +102,6 @@
 		3A4E8CCB22EF1B63002B0FA7 /* EventDetailViewControllerMirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewControllerMirror.swift; sourceTree = "<group>"; };
 		3A4EA9E423217702000C4EBA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		3A4EA9E523217702000C4EBA /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		3A53DE4E230C13510002DD68 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		3A53DE4F230C13520002DD68 /* DataRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestable.swift; sourceTree = "<group>"; };
 		3A53DE52230C13A20002DD68 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		3A53DE54230C13B10002DD68 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		3A5EE0D3229EF7ED00CAFA52 /* WoopEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoopEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3A50C1248E566100612F86 /* Networking in Frameworks */,
 				3A53DE53230C13A20002DD68 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +172,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A2F5934247ECF0C001F89BE /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				3A2F5935247ECF1B001F89BE /* EventRow.swift */,
+				3A2F5931247EC958001F89BE /* SwiftUIView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		3A2F5939247ECF8B001F89BE /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				3A2F593A247ECF8B001F89BE /* ImageLoader.swift */,
+				3A2F593B247ECF8B001F89BE /* AsyncImage.swift */,
+				3A2F593C247ECF8B001F89BE /* ImageLoaderView.swift */,
+			);
+			path = ImageLoader;
+			sourceTree = "<group>";
+		};
 		3A4E8CC822EF12DF002B0FA7 /* Stubbable */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +253,7 @@
 		3A5EE0FC229EFEE200CAFA52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A3A50BF248E50BC00612F86 /* Networking */,
 				3A4EA9E423217702000C4EBA /* Nimble.framework */,
 				3A4EA9E523217702000C4EBA /* Quick.framework */,
 				3A53DE54230C13B10002DD68 /* Alamofire.framework */,
@@ -238,8 +267,6 @@
 			children = (
 				3AF6347B243F94B8000A48EE /* Endpoints */,
 				3A5EE103229F045D00CAFA52 /* Environment.swift */,
-				3A53DE4F230C13520002DD68 /* DataRequestable.swift */,
-				3A53DE4E230C13510002DD68 /* Service.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -247,6 +274,7 @@
 		3A5EE102229F044000CAFA52 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3A2F5939247ECF8B001F89BE /* ImageLoader */,
 				3AF63484243FBBF3000A48EE /* TableViewModelDataSource.swift */,
 				3A5EE13D229F140600CAFA52 /* Bindable.swift */,
 				3AD284E423017D8400ABC801 /* Identifier.swift */,
@@ -353,10 +381,11 @@
 		3A5EE18722A09B1000CAFA52 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				3A5EE154229F175100CAFA52 /* Cell */,
-				3A5EE148229F15FB00CAFA52 /* HomeViewModel.swift */,
+				3A2F5934247ECF0C001F89BE /* SwiftUI */,
 				3A5EE17222A0844D00CAFA52 /* HomeTableViewController.swift */,
+				3A5EE148229F15FB00CAFA52 /* HomeViewModel.swift */,
 				3A5EE17322A0844D00CAFA52 /* HomeTableViewController.xib */,
+				3A5EE154229F175100CAFA52 /* Cell */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -431,6 +460,9 @@
 			dependencies = (
 			);
 			name = WoopEvents;
+			packageProductDependencies = (
+				3A3A50C0248E566100612F86 /* Networking */,
+			);
 			productName = WoopEvents;
 			productReference = 3A5EE0D3229EF7ED00CAFA52 /* WoopEvents.app */;
 			productType = "com.apple.product-type.application";
@@ -621,21 +653,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A2F5932247EC958001F89BE /* SwiftUIView.swift in Sources */,
 				3AF63486243FBBF3000A48EE /* TableViewModelDataSource.swift in Sources */,
 				3A5EE13E229F140600CAFA52 /* Bindable.swift in Sources */,
 				3AF239CE230DBC5A0008F876 /* Environment.swift in Sources */,
 				3A5EE18B22A0B63500CAFA52 /* Encodable+Extension.swift in Sources */,
-				3AF239D1230DBC5A0008F876 /* Service.swift in Sources */,
-				3AF239D0230DBC5A0008F876 /* DataRequestable.swift in Sources */,
 				3A5EE14E229F15FB00CAFA52 /* HomeViewModel.swift in Sources */,
 				3A5EE15D229F1A1D00CAFA52 /* HomeTableViewCell.swift in Sources */,
 				3A5EE17E22A09A7B00CAFA52 /* EventDetailObject.swift in Sources */,
+				3A2F5941247ECF8B001F89BE /* AsyncImage.swift in Sources */,
 				3A5EE10B229F0BD100CAFA52 /* CoordinatorProtocols.swift in Sources */,
+				3A2F5936247ECF1B001F89BE /* EventRow.swift in Sources */,
 				3AF6347D243F94C9000A48EE /* EventsEndpoint.swift in Sources */,
 				3A5EE17422A0844D00CAFA52 /* HomeTableViewController.swift in Sources */,
+				3A2F5933247ECEFA001F89BE /* StubbableProtocols.swift in Sources */,
 				3AD284E523017D8400ABC801 /* Identifier.swift in Sources */,
 				3A5EE14A229F15FB00CAFA52 /* HomeCoordinator.swift in Sources */,
 				3A5EE19522A1291C00CAFA52 /* UIViewController+Extension.swift in Sources */,
+				3A2F5942247ECF8B001F89BE /* ImageLoaderView.swift in Sources */,
 				3A5EE18122A09A7B00CAFA52 /* EventDetailViewModel.swift in Sources */,
 				3A5EE18522A09AA000CAFA52 /* EventDetailViewController.swift in Sources */,
 				3A5EE14B229F15FB00CAFA52 /* Event.swift in Sources */,
@@ -643,8 +678,10 @@
 				3AF239CF230DBC5A0008F876 /* Localized.swift in Sources */,
 				3A5EE16C229FE70500CAFA52 /* DateFormatter+Extension.swift in Sources */,
 				3A5EE0D7229EF7ED00CAFA52 /* AppDelegate.swift in Sources */,
+				3A2F5940247ECF8B001F89BE /* ImageLoader.swift in Sources */,
 				3A9CDA7A22FC5BA900232D24 /* Sequence+Extension.swift in Sources */,
 				3A5EE123229F121300CAFA52 /* AppCoordinator.swift in Sources */,
+				3A2F5944247ED018001F89BE /* EventsStub.swift in Sources */,
 				3AF6347F243F94D6000A48EE /* CheckInEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,10 +697,8 @@
 				3A4EA9EB2321A28F000C4EBA /* EventDetailViewControllerTests.swift in Sources */,
 				3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */,
 				3A5EE16F229FE73700CAFA52 /* DateFormatterTests.swift in Sources */,
-				3A4E8CCA22EF12FE002B0FA7 /* StubbableProtocols.swift in Sources */,
 				3A5EE19722A1296D00CAFA52 /* UIViewControllerTests.swift in Sources */,
 				3A9ECBF92443766000F0DE50 /* HomeCellViewModelTests.swift in Sources */,
-				3A420D8F231EEFFE0066CFBE /* EventsStub.swift in Sources */,
 				3A5EE19122A1268400CAFA52 /* EncodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -820,8 +855,9 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WoopEvents/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -845,8 +881,9 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WoopEvents/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -871,6 +908,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WoopEventsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -895,6 +933,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WoopEventsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -939,6 +978,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A3A50C0248E566100612F86 /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A5EE0CB229EF7ED00CAFA52 /* Project object */;
 }

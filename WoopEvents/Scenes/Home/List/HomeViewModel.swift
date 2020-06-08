@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Networking
 
 protocol HomeNavigationProtocol: AnyObject {
     func didSelectEvent(_ event: Event)

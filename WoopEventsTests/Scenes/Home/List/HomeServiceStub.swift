@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 @testable import WoopEvents
 
 class HomeServiceStub {
@@ -14,6 +15,22 @@ class HomeServiceStub {
 }
 
 class HomeServiceSuccessStub: HomeServiceStub, DataRequestable {
+    enum SpyErrors: Error {
+        case `default`
+    }
+
+    @available(iOS 13.0, *)
+    func request<T>(_ request: Request) -> AnyPublisher<T, Error> where T : Decodable {
+        let events = Events.stub(withCount: 3)
+        guard let unEvents = events as? T else {
+            preconditionFailure("T is not events")
+        }
+        return Just(unEvents)
+            .mapError { _ in
+                SpyErrors.default
+        }.eraseToAnyPublisher()
+    }
+
     func request<T>(_ request: Request, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
 		fetchCalled = true
         let events = Events.stub(withCount: 3)
@@ -25,6 +42,18 @@ class HomeServiceSuccessStub: HomeServiceStub, DataRequestable {
 }
 
 class HomeServiceErrorStub: HomeServiceStub, DataRequestable {
+    @available(iOS 13.0, *)
+    func request<T>(_ request: Request) -> AnyPublisher<T, Error> where T : Decodable {
+        let events = Events.stub(withCount: 3)
+        guard let unEvents = events as? T else {
+            preconditionFailure("T is not events")
+        }
+        return Just(unEvents)
+            .mapError { _ in
+                SpyErrors.default
+        }.eraseToAnyPublisher()
+    }
+
     func request<T>(_ request: Request, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
         fetchCalled = true
         completion(.failure(SpyErrors.default))

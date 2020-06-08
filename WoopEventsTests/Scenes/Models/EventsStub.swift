@@ -26,7 +26,7 @@ extension Event: Stubbable {
                           latitude: 11.0,
                           longitude: 10.0,
                           //swiftlint:disable force_unwrapping
-            image: URL(string: "www.google.com")!,
+            image: URL(string: "http://lproweb.procempa.com.br/pmpa/prefpoa/seda_news/usu_img/Papel%20de%20Parede.png")!,
             eventDescription: "Encontro para discutir soluções voltadas a engajamento e captação de recursos",
             //swiftlint:disable force_unwrapping
             date: dateFormatter.date(from: "23/09/1990 06:00")!,
