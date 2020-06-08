@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Networking
 @testable import WoopEvents
 
 class HomeServiceStub {

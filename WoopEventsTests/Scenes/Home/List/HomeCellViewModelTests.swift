@@ -27,7 +27,7 @@ class HomeCellViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.month, "set")
         XCTAssertEqual(viewModel.description, "Encontro para discutir soluções voltadas a engajamento e captação de recursos")
         //swiftlint:disable force_unwrapping
-        XCTAssertEqual(viewModel.imageUrl, URL(string: "www.google.com")!)
+        XCTAssertEqual(viewModel.imageUrl, URL(string: "http://lproweb.procempa.com.br/pmpa/prefpoa/seda_news/usu_img/Papel%20de%20Parede.png")!)
         XCTAssertEqual(viewModel.event.id.rawValue, "123")
     }
 

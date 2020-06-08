@@ -24,7 +24,7 @@ final class EventDetailViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.eventLocation.longitude, location.longitude)
         XCTAssertEqual(viewModel.eventLocation.latitude, location.latitude)
         //swiftlint:disable force_unwrapping
-        XCTAssertEqual(viewModel.eventImageUrl, URL(string: "www.google.com")!)
+        XCTAssertEqual(viewModel.eventImageUrl, URL(string: "http://lproweb.procempa.com.br/pmpa/prefpoa/seda_news/usu_img/Papel%20de%20Parede.png")!)
     }
 
     func testCheckinSuccess() {

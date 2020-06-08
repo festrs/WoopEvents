@@ -15,7 +15,7 @@
 		3A2F5941247ECF8B001F89BE /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F593B247ECF8B001F89BE /* AsyncImage.swift */; };
 		3A2F5942247ECF8B001F89BE /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F593C247ECF8B001F89BE /* ImageLoaderView.swift */; };
 		3A2F5944247ED018001F89BE /* EventsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */; };
-		3A3A50C1248E566100612F86 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 3A3A50C0248E566100612F86 /* Networking */; };
+		3A3A50CB248E918200612F86 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 3A3A50CA248E918200612F86 /* Networking */; };
 		3A420D8D231EEFDE0066CFBE /* EventDetailServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */; };
 		3A420D8E231EEFE40066CFBE /* EventDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EE19822A138D700CAFA52 /* EventDetailViewModelTests.swift */; };
 		3A4EA9E92321A219000C4EBA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EA9E423217702000C4EBA /* Nimble.framework */; };
@@ -94,7 +94,7 @@
 		3A2F593A247ECF8B001F89BE /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		3A2F593B247ECF8B001F89BE /* AsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		3A2F593C247ECF8B001F89BE /* ImageLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
-		3A3A50BF248E50BC00612F86 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Networking; path = ../Networking; sourceTree = "<group>"; };
+		3A3A50C9248E913E00612F86 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Networking; sourceTree = "<group>"; };
 		3A3E6C0F22EF34700010CCD2 /* HomeServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceStub.swift; sourceTree = "<group>"; };
 		3A4E8CC422EF1072002B0FA7 /* EventDetailServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailServiceStub.swift; sourceTree = "<group>"; };
 		3A4E8CC622EF118A002B0FA7 /* EventsStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsStub.swift; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A3A50C1248E566100612F86 /* Networking in Frameworks */,
+				3A3A50CB248E918200612F86 /* Networking in Frameworks */,
 				3A53DE53230C13A20002DD68 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,6 +204,7 @@
 			children = (
 				3A5EE0D5229EF7ED00CAFA52 /* WoopEvents */,
 				3A5EE0EA229EF7EE00CAFA52 /* WoopEventsTests */,
+				3A3A50C9248E913E00612F86 /* Networking */,
 				3A5EE0D4229EF7ED00CAFA52 /* Products */,
 				3A5EE0FC229EFEE200CAFA52 /* Frameworks */,
 			);
@@ -253,7 +254,6 @@
 		3A5EE0FC229EFEE200CAFA52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A3A50BF248E50BC00612F86 /* Networking */,
 				3A4EA9E423217702000C4EBA /* Nimble.framework */,
 				3A4EA9E523217702000C4EBA /* Quick.framework */,
 				3A53DE54230C13B10002DD68 /* Alamofire.framework */,
@@ -461,7 +461,7 @@
 			);
 			name = WoopEvents;
 			packageProductDependencies = (
-				3A3A50C0248E566100612F86 /* Networking */,
+				3A3A50CA248E918200612F86 /* Networking */,
 			);
 			productName = WoopEvents;
 			productReference = 3A5EE0D3229EF7ED00CAFA52 /* WoopEvents.app */;
@@ -482,6 +482,8 @@
 				3A5EE0E9229EF7EE00CAFA52 /* PBXTargetDependency */,
 			);
 			name = WoopEventsTests;
+			packageProductDependencies = (
+			);
 			productName = WoopEventsTests;
 			productReference = 3A5EE0E7229EF7EE00CAFA52 /* WoopEventsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -980,7 +982,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A3A50C0248E566100612F86 /* Networking */ = {
+		3A3A50CA248E918200612F86 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
 		};

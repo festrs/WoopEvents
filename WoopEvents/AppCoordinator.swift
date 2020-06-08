@@ -6,6 +6,7 @@
 //  Copyright © 2019 FelipeP. All rights reserved.
 //
 import UIKit
+import Networking
 
 final class AppCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
